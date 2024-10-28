@@ -1,14 +1,17 @@
 import json
 from degree_day import DegreeDayCalculator
-# import xarray as xra
 
 def lambda_handler(event, context):
     
+    print(f'The lower temperature threshold is: {event["temp_low"]}')
+    print(f'The upper temperature threshold is: {event["temp_high"]}')
+
     return {
         'statusCode': 200,
-        'body': json.dumps('Hello from Lambda!')
+        'body': json.dumps('Lambda function run successful!')
     }
 
 if __name__ == "__main__":
 
-    print(lambda_handler(event='a', context='b'))
+    event = {'temp_high': 30, 'temp_low': 8}
+    print(lambda_handler(event=event, context='b'))
