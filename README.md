@@ -3,24 +3,24 @@ Author: Tim Farkas, EcoData Technology
 
 ## Getting Started
 
-1. Log in to AWS console at: [this login](https://tinyurl.com/entsoc2024-cloud-workshop)
+1. Log in to AWS console with [this login](https://tinyurl.com/entsoc2024-cloud-workshop)
     - AWS Account #: 440377999911
     - IAM username: guestuser1 (2,3, ...) 
     - Password: Ask Tim. 
-2. Take 2 minutes to browse Services (top left of nav bar)
+2. Take 2 minutes to browse Services (top left of nav bar).
 
 ## Elastic Cloud Compute (EC2)
 ### Launch An EC2 Instance
-1. Navigate to EC2 Dashboard, then `Instances` > `Instances` on the left nav bar
-2. Select `Launch instances`
-3. Name your instance with your initials: e.g., `entsoc-tef`
+1. Navigate to EC2 Dashboard, then `Instances` > `Instances` on the left nav bar.
+2. Select `Launch instances`.
+3. Name your instance with your initials: e.g., `entsoc-tef`.
 4. Application and OS Images: 
-    - Select Ubuntu panel 
-    - Amazon Machine Image: `Ubuntu Server 24.04`
-    - Architecture: `64-bit (x84)`,
-5. Instance Type: `t2.micro`
+    - Select `Ubuntu` card. 
+    - Amazon Machine Image: `Ubuntu Server 24.04`.
+    - Architecture: `64-bit (x84)`.
+5. Instance Type: `t2.micro`.
 6. Key Pair: `Proceed without a key pair`
-7. Network Settings: Select "Existing security group", check `entsoc2024-guest-ec2`
+7. Network Settings: Select "Existing security group" > Check `entsoc2024-guest-ec2` box.
 8. Configure Storage: `8 GiB gp3`.
 9. Advanced Settings
     - IAM Instance Profile: `entsoc2024-ec2-instance-profile-s3-only` 
@@ -36,7 +36,7 @@ Author: Tim Farkas, EcoData Technology
 3. Submit command `ls -al` to see contents of your home directory.
 
 ### Download A File From S3
-1. Instal the AWS CLI:
+1. Install the AWS Command Line Interface (CLI):
 ``` bash 
 sudo snap install aws-cli --classic
 ``` 
