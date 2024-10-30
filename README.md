@@ -51,5 +51,21 @@ aws s3 ls entsoc2024-ecodata-cloud-workshop
     - Run `aws s3 cp <S3 URI> .` to download the package to your home directory. (Don't forget the `.` at the end of the command - it means "current directory".)
     - Check the download was successful with `ls -al`. 
 
+## Serverless Compute with AWS Lambda Functions
+
+1. Navigate to the Lambda service. 
+2. Select `Create function`. 
+3. Give it a name prefixed with `gdd` and suffixed with your initials, e.g, `entsoc-tef`.
+4. Runtime: `Python 3.9`.
+5. Architecture: `x86_64`. 
+6. Change default execution role: `Use an existing role` > `entsoc2024-lambda-role`. 
+7. Additional Configurations: 
+    - Select `Enable VPC`. 
+    - VPC: `Default`. 
+    - Subnets: Select all 6.
+    - Security Group: `Default`. 
+    
+
+
 
 
