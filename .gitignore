@@ -164,6 +164,8 @@ cython_debug/
 
 # deployments
 *.zip
+lambda_deployment/
 
 # readme artifacts
 README_files
+

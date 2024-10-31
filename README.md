@@ -61,9 +61,9 @@ aws s3 ls entsoc2024-ecodata-cloud-workshop
 6. Change default execution role: `Use an existing role` > `entsoc2024-lambda-role`. 
 7. Additional Configurations: 
     - Select `Enable VPC`. 
-    - VPC: `Default`. 
-    - Subnets: Select all 6.
-    - Security Group: `Default`. 
+    - VPC: `entsoc2024`. 
+    - Subnets: Select all subnets (both `private` and `public`).
+    - Security Group: `default` (`sg-067466a5f4c489420`).
     
 
 
