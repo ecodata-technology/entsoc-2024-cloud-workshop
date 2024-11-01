@@ -45,4 +45,4 @@ jobs:
           with:
             function_name: ${{ env.FUNCTION_NAME }}
             role: ${{ env.IAM_ROLE }}
-            zip_file: lambda_deloyment/lambda_deployment.zip 
+            zip_file: lambda_deployment/lambda_deployment.zip 
