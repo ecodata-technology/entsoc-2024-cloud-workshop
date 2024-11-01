@@ -53,17 +53,49 @@ aws s3 ls entsoc2024-ecodata-cloud-workshop
 
 ## Serverless Compute with AWS Lambda Functions
 
+### Create A Lambda Function
 1. Navigate to the Lambda service. 
 2. Select `Create function`. 
-3. Give it a name prefixed with `gdd` and suffixed with your initials, e.g, `entsoc-tef`.
+3. Give it a name prefixed with `entsoc2024` and suffixed with your initials, e.g, `entsoc-tef`.
 4. Runtime: `Python 3.9`.
 5. Architecture: `x86_64`. 
-6. Change default execution role: `Use an existing role` > `entsoc2024-lambda-role`. 
+6. Change default execution role: `Use an existing role` > `entsoc2024-lambda-role`.
+
+### Hello World
+10. Run the function: 
+    - Click `Test` > `Create new test`. 
+    - Click `Invoke`. 
+7. Change line 4 (TODO) to: `name = event['name']`
+8. Change the argument to `json.dumps` to: `'Hello, ' + name + '!'`
+9. Click `Deploy` and wait for function to update. 
+10. Run the function: 
+    - Click `Test` > `Create new test`. 
+    - Change `key1` to `name`, and `value1` to `you gorgeous cloud user` (or whatever you want).
+    - Click `Invoke`. 
+
+### Deploy An Insect Phenology Model
+1. Deploy the phenology model code: 
+    - In another browser tab, navigate to the workshop S3 bucket. 
+    - Select `lambda_deployment.zip` and copy the `URL` (not `S3 URI`) to your clipboard. 
+    - In the Lambda Console, under the `Code` tab, select `Upload from` > `Amazon S3 location` and paste the URL. Hit `Save`.
+    - Take a minute to look at the new code.
+2. Configure a new test with the following event: 
+``` python
+{
+    "date": "20230X01", 
+    "lt": 0, 
+    "ut": 30, 
+    "user": "YOUR INITIALS OR SOMETHING"
+}
+```
+
+
 7. Additional Configurations: 
     - Select `Enable VPC`. 
     - VPC: `entsoc2024`. 
-    - Subnets: Select all _private_ subnets. 
+    - Subnets: Select all _private_ subnets, and NOT the public subnet. 
     - Security Group: `default` (`sg-067466a5f4c489420`).
+8. 
     
 
 
