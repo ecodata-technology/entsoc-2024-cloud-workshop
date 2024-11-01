@@ -34,7 +34,8 @@ jobs:
         - name: create deployment package
           run: |
             cd lambda_deployment/lambda_deployment &&
-            zip -r ../lambda_deployment.zip .
+            zip -r ../lambda_deployment.zip . && 
+            cd ../..
 
         - name: Lambda function default deploy
           env:
