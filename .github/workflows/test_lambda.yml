@@ -34,8 +34,11 @@ jobs:
         - name: create deployment package
           run: |
             cd lambda_deployment/lambda_deployment &&
-            zip -r ../lambda_deployment.zip . && 
-            cd ../..
+            zip -r ../lambda_deployment.zip .
+
+        - name: upload to s3
+          run: aws s3 cp lambda_deployment/lambda_deployment.zip s3://entsoc2024-ecodata-cloud-workshop/lambda_deployment.zip
+
 
         - name: Lambda function default deploy
           env:
