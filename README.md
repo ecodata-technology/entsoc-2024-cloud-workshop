@@ -62,7 +62,7 @@ aws s3 ls entsoc2024-ecodata-cloud-workshop
 7. Additional Configurations: 
     - Select `Enable VPC`. 
     - VPC: `entsoc2024`. 
-    - Subnets: Select all subnets (both `private` and `public`).
+    - Subnets: Select all _private_ subnets. 
     - Security Group: `default` (`sg-067466a5f4c489420`).
     
 
