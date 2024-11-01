@@ -1,0 +1,47 @@
+name: Degree Day ETL 
+on: 
+  push: 
+    branches:
+      - main
+    paths:
+      - '.github/workflows/test_lambda.yml'
+      - 'lambda_deployment/lambda_deployment/lambda_function.py'
+  workflow_dispatch:
+env: 
+  S3_BUCKET: entsoc2024-ecodata-cloud-workshop
+  RUN_TIMESTAMP: $(date +%Y%m%d%H%M%S)
+permissions:
+  id-token: write   # This is required for requesting the JWT
+  contents: read     
+jobs:
+  package-deploy:
+  
+    name: Package / Deploy ETL Lambda Function
+    runs-on: ubuntu-latest  
+    steps:  
+
+        - name: Checkout
+          uses: actions/checkout@v2    
+          
+        - name: Configure AWS Authentication
+          id: aws-authentication
+          uses: aws-actions/configure-aws-credentials@v3
+          with:
+            role-to-assume: arn:aws:iam::440377999911:role/aws-github-actions-role
+            role-session-name: samplerolesession
+            aws-region: us-east-1
+        
+        - name: create deployment package
+          run: |
+            cd lambda_deployment/lambda_deployment &&
+            zip -r ../lambda_deployment.zip .
+
+        - name: Lambda function default deploy
+          env:
+            IAM_ROLE: arn:aws:iam::440377999911:role/entsoc2024-lambda-role
+            FUNCTION_NAME: allTogetherNow
+          uses: appleboy/lambda-action@v0.1.9
+          with:
+            function_name: ${{ env.FUNCTION_NAME }}
+            role: ${{ env.IAM_ROLE }}
+            zip_file: lambda_deloyment/lambda_deployment.zip 
