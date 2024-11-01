@@ -1,0 +1,15 @@
+
+```{python}
+import xarray as xra
+import matplotlib.pyplot as plt
+```
+```{python}
+dd = xra.open_dataset('/home/ec2-user/prism-etl/tmin/20211015/PRISM_tmin_stable_4kmD2_20211015_nc.nc', engine = 'netcdf4')
+```
+
+
+```{python}
+dd = xra.open_dataset('/home/ec2-user/prism-etl/gdd/raster.nc', engine = 'netcdf4')
+dd.to_dataarray().plot()
+plt.savefig('/home/ec2-user/prism-etl/gdd/myplot.png')
+```

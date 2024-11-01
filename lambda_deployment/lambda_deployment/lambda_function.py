@@ -1,9 +1,13 @@
 import json
-import boto3
-from degree_day import degree_day as dd
+import shutil
 import urllib
 import os
 import zipfile
+import boto3
+from degree_day import degree_day as dd
+import xarray as xra
+import matplotlib.pyplot as plt
+
 
 def lambda_handler(event, context):
    
@@ -12,40 +16,40 @@ def lambda_handler(event, context):
     try:
         response = urllib.request.urlopen('https://aws.amazon.com')
         status_code = response.getcode()
-        print(f'Response Code: {status_code}. Internet connection established!')
+        print(f'- Response Code: {status_code}. Internet connection established!')
     except Exception as e:
-        print('Error:', e)
+        print('- Error:', e)
         raise e
 
     ## Variables 
     print("Loading Common Variables and Objects")
-    storage_dir = "/tmp/" # do not change me
-    # time_lag_days = 2
-    # bbox_file_name = 'or-bbox.geojson'
-    # bbox_file_location = '/'
+    # storage_dir = "/home/ec2-user/prism-etl" # do not change me
+    storage_dir = "/tmp/prism-etl" # for lambda 
     weather_var_list = ['tmin', 'tmax'] 
     base_url = 'https://services.nacse.org/prism/data/public/4km'
     format = 'nc'
-    # s3_bucket = 'usda-ars-dormanlab-cdd-app'
+    s3_bucket = 'entsoc2024-ecodata-cloud-workshop'
     s3_client = boto3.client('s3')
     gdd_dir = os.path.join(storage_dir, 'gdd')
+    if os.path.exists(gdd_dir):
+        shutil.rmtree(gdd_dir)
+    os.makedirs(gdd_dir)
 
     ## Common Objects
     target_date = event['date']
-    # bbox_file_path = os.path.join(bbox_file_location, bbox_file_name)
-    # bbox = gpd.read_file(bbox_file_path)
-    # with open('pest_params.yaml') as f:
-    #     pest_params = yaml.full_load(f)
-    # pests = list(pest_params.keys())
     lt = event['temp_low']
     ut = event['temp_high']
-    print(f'The lower temperature threshold is: {lt}')
-    print(f'The upper temperature threshold is: {ut}')
-
-    dd_calc = dd.DegreeDayCalculator(lower_threshold=lt, upper_threshold=ut)
+    user = event['user']
+    raster_name = f'gdd_raster_user={user}_date={target_date}_lt={lt}_ut={ut}.nc'
+    local_raster_path = os.path.join(gdd_dir, raster_name)
+    png_name = f'gdd_raster_user={user}_date={target_date}_lt={lt}_ut={ut}.png'
+    local_png_path = os.path.join(gdd_dir, png_name)
+    s3_raster_loc = f'gdd_rasters/{user}/{raster_name}'
+    s3_png_loc = f'gdd_rasters/{user}/{png_name}'
+        
 
     for var in weather_var_list:
-        print(f"- Pulling {var} data")
+        print(f"Pulling {var} data")
         dest_dir = os.path.join(storage_dir, var, target_date)
         dest_file = os.path.join(dest_dir, f'{var}_{target_date}.zip')
         if not os.path.exists(dest_dir):
@@ -59,7 +63,6 @@ def lambda_handler(event, context):
         try:
             urllib.request.urlretrieve(url, dest_file)
         except: 
-            weather_pull_succeeded = False
             print('- Failed connection to PRISM!')
             break 
         else: print('- Connection to PRISM endpoint established.')
@@ -72,27 +75,49 @@ def lambda_handler(event, context):
             break # need both tmin and tmax, so break out if either fails
 
         # unzip data
+        print(f'- Uncompressing {var} download')
         with zipfile.ZipFile(dest_file, 'r') as zip_ref:
             zip_ref.extractall(dest_dir)
         
         print(f'- Successfully pulled {var}')
         
-        prism_dict = {} 
-        # for var in ['tmin', 'tmax']:
-        #     print(f'- Clipping {var} raster to bounding box.')
-        #     # load var
-        #     dest_dir = os.path.join(storage_dir, var, target_date)
-        #     raw_raster = rioxarray.open_rasterio(os.path.join(dest_dir, f'prism_{var}_us_30s_{target_date}.bil'))
-        #     or_raster = raw_raster.rio.clip(bbox.geometry, drop = True)
-        #     or_raster = or_raster.where(or_raster != -9999)
-        #     prism_dict[var] = or_raster.drop_vars('band').squeeze()
-        #     del raw_raster, or_raster
+    # create GDD artifacts
+    print('Creating GDD artifacts.')
+    prism_dict = {} 
+
+    for var in weather_var_list:
+
+        print(f'- Loading {var} NetCDF file.')
+        file_name = f'PRISM_{var}_stable_4kmD2_{target_date}_nc.nc'
+        file_path = os.path.join(storage_dir, var, target_date, file_name)
+        prism_dict[var] = xra.open_dataset(file_path, engine = 'netcdf4').Band1
+
+    # get gdd layer
+    print(f'- Setting up degree day calculator with lt = {lt} and ut = {ut}')
+    ss_calculator = dd.DegreeDayCalculator(lt, ut) 
+
+    print(f'- Calculating raster. This may take a moment ... ')
+    dd_array = ss_calculator.get_degree_days_raster(prism_dict['tmin'], prism_dict['tmax'])
+
+    print(f'- Saving raster to file.')
+    dd_array.to_netcdf(local_raster_path)
+
+    # Plotting to png
+    print(f'- Plotting raster and saving to file.')
+    dd_array.plot()
+    plt.savefig(local_png_path)
+    
+    # upload to S3
+    print('Uploading files to S3')
+    response = s3_client.upload_file(local_raster_path, s3_bucket, s3_raster_loc)
+    response = s3_client.upload_file(local_png_path, s3_bucket, s3_png_loc)
+
     return {
         'statusCode': 200,
-        'body': json.dumps('Lambda function run successful!')
+        'body': json.dumps('Computation complete!')
     }
 
 if __name__ == "__main__":
 
-    event = {'temp_high': 30, 'temp_low': 8, 'date': '20211010'}
+    event = {'temp_high': 30, 'temp_low': 8, 'date': '20211022', 'user': 'tfarkas'}
     print(lambda_handler(event=event, context='b'))
