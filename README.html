@@ -86,13 +86,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="getting-started" class="level2">
 <h2 class="anchored" data-anchor-id="getting-started">Getting Started</h2>
 <ol type="1">
-<li>Log in to AWS console at: <a href="https://tinyurl.com/entsoc2024-cloud-workshop">this login</a>
+<li>Log in to AWS console with <a href="https://tinyurl.com/entsoc2024-cloud-workshop">this login</a>
 <ul>
 <li>AWS Account #: 440377999911</li>
 <li>IAM username: guestuser1 (2,3, …)</li>
 <li>Password: Ask Tim.</li>
 </ul></li>
-<li>Take 2 minutes to browse Services (top left of nav bar)</li>
+<li>Take 2 minutes to browse Services (top left of nav bar).</li>
 </ol>
 </section>
 <section id="elastic-cloud-compute-ec2" class="level2">
@@ -100,24 +100,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="launch-an-ec2-instance" class="level3">
 <h3 class="anchored" data-anchor-id="launch-an-ec2-instance">Launch An EC2 Instance</h3>
 <ol type="1">
-<li>Navigate to EC2 Dashboard, then <code>Instances</code> &gt; <code>Instances</code> on the left nav bar</li>
-<li>Select <code>Launch instances</code></li>
-<li>Name your instance with your initials: e.g., <code>entsoc-tef</code></li>
+<li>Navigate to EC2 Dashboard, then <code>Instances</code> &gt; <code>Instances</code> on the left nav bar.</li>
+<li>Select <code>Launch instances</code>.</li>
+<li>Name your instance with your initials: e.g., <code>entsoc-tef</code>.</li>
 <li>Application and OS Images:
 <ul>
-<li>Select Ubuntu panel</li>
-<li>Amazon Machine Image: <code>Ubuntu Server 24.04</code></li>
-<li>Architecture: <code>64-bit (x84)</code>,</li>
+<li>Select <code>Ubuntu</code> card.</li>
+<li>Amazon Machine Image: <code>Ubuntu Server 24.04</code>.</li>
+<li>Architecture: <code>64-bit (x84)</code>.</li>
 </ul></li>
-<li>Instance Type: <code>t2.micro</code></li>
+<li>Instance Type: <code>t2.micro</code>.</li>
 <li>Key Pair: <code>Proceed without a key pair</code></li>
-<li>Network Settings: Select existing security group, check <code>entsoc2024-guest-ec2</code></li>
+<li>Network Settings: Select “Existing security group” &gt; Check <code>entsoc2024-guest-ec2</code> box.</li>
 <li>Configure Storage: <code>8 GiB gp3</code>.</li>
 <li>Advanced Settings
 <ul>
 <li>IAM Instance Profile: <code>entsoc2024-ec2-instance-profile-s3-only</code></li>
 </ul></li>
-<li>Return to <code>Instances</code> &gt; <code>Instances</code> and wait for your Instance State to be <code>Running</code>.</li>
+<li>Return to <code>Instances</code> &gt; <code>Instances</code> and wait for your Instance State to be <code>Running</code>, about 30 seconds. You may need to refresh the browser.</li>
 </ol>
 </section>
 <section id="explore-and-connect-to-your-ec2-instance" class="level3">
@@ -137,7 +137,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="download-a-file-from-s3" class="level3">
 <h3 class="anchored" data-anchor-id="download-a-file-from-s3">Download A File From S3</h3>
 <ol type="1">
-<li>Instal the AWS CLI:</li>
+<li>Install the AWS Command Line Interface (CLI):</li>
 </ol>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> snap install aws-cli <span class="at">--classic</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ol start="2" type="1">
@@ -150,9 +150,71 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Download the deployment package from the bucket:
 <ul>
 <li>Get the deployment package URI from the S3 Console.</li>
-<li>Run <code>aws s3 cp &lt;S3 URI&gt; .</code> to download the package to your home directory. (Don’t forget the <code>.</code> at the end of the command.)</li>
+<li>Run <code>aws s3 cp &lt;S3 URI&gt; .</code> to download the package to your home directory. (Don’t forget the <code>.</code> at the end of the command - it means “current directory”.)</li>
 <li>Check the download was successful with <code>ls -al</code>.</li>
 </ul></li>
+</ol>
+</section>
+</section>
+<section id="serverless-compute-with-aws-lambda-functions" class="level2">
+<h2 class="anchored" data-anchor-id="serverless-compute-with-aws-lambda-functions">Serverless Compute with AWS Lambda Functions</h2>
+<section id="create-a-lambda-function" class="level3">
+<h3 class="anchored" data-anchor-id="create-a-lambda-function">Create A Lambda Function</h3>
+<ol type="1">
+<li>Navigate to the Lambda service.</li>
+<li>Select <code>Create function</code>.</li>
+<li>Give it a name prefixed with <code>entsoc2024</code> and suffixed with your initials, e.g, <code>entsoc-tef</code>.</li>
+<li>Runtime: <code>Python 3.9</code>.</li>
+<li>Architecture: <code>x86_64</code>.</li>
+<li>Change default execution role: <code>Use an existing role</code> &gt; <code>entsoc2024-lambda-role</code>.</li>
+</ol>
+</section>
+<section id="hello-world" class="level3">
+<h3 class="anchored" data-anchor-id="hello-world">Hello World</h3>
+<ol start="10" type="1">
+<li>Run the function:
+<ul>
+<li>Click <code>Test</code> &gt; <code>Create new test</code>.</li>
+<li>Click <code>Invoke</code>.</li>
+</ul></li>
+<li>Change line 4 (TODO) to: <code>name = event['name']</code></li>
+<li>Change the argument to <code>json.dumps</code> to: <code>'Hello, ' + name + '!'</code></li>
+<li>Click <code>Deploy</code> and wait for function to update.</li>
+<li>Run the function:
+<ul>
+<li>Click <code>Test</code> &gt; <code>Create new test</code>.</li>
+<li>Change <code>key1</code> to <code>name</code>, and <code>value1</code> to <code>you gorgeous cloud user</code> (or whatever you want).</li>
+<li>Click <code>Invoke</code>.</li>
+</ul></li>
+</ol>
+</section>
+<section id="deploy-an-insect-phenology-model" class="level3">
+<h3 class="anchored" data-anchor-id="deploy-an-insect-phenology-model">Deploy An Insect Phenology Model</h3>
+<ol type="1">
+<li>Deploy the phenology model code:
+<ul>
+<li>In another browser tab, navigate to the workshop S3 bucket.</li>
+<li>Select <code>lambda_deployment.zip</code> and copy the <code>URL</code> (not <code>S3 URI</code>) to your clipboard.</li>
+<li>In the Lambda Console, under the <code>Code</code> tab, select <code>Upload from</code> &gt; <code>Amazon S3 location</code> and paste the URL. Hit <code>Save</code>.</li>
+<li>Take a minute to look at the new code.</li>
+</ul></li>
+<li>Configure a new test with the following event:</li>
+</ol>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"date"</span>: <span class="st">"20230X01"</span>, </span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"lt"</span>: <span class="dv">0</span>, </span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"ut"</span>: <span class="dv">30</span>, </span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"user"</span>: <span class="st">"YOUR INITIALS OR SOMETHING"</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ol start="7" type="1">
+<li>Additional Configurations:
+<ul>
+<li>Select <code>Enable VPC</code>.</li>
+<li>VPC: <code>entsoc2024</code>.</li>
+<li>Subnets: Select all <em>private</em> subnets, and NOT the public subnet.</li>
+<li>Security Group: <code>default</code> (<code>sg-067466a5f4c489420</code>).</li>
+</ul></li>
+<li></li>
 </ol>
 </section>
 </section>
