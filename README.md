@@ -55,21 +55,21 @@ aws s3 ls entsoc2024-ecodata-cloud-workshop
 
 ### Create A Lambda Function
 1. Navigate to the Lambda service. 
-2. Select `Create function`. 
-3. Give it a name prefixed with `entsoc2024` and suffixed with your initials, e.g, `entsoc-tef`.
+2. Select `Create function` > `Author from scratch`. 
+3. Give it a name prefixed with `entsoc2024` and suffixed with your initials, e.g, `entsoc2024-tef`.
 4. Runtime: `Python 3.9`.
 5. Architecture: `x86_64`. 
 6. Change default execution role: `Use an existing role` > `entsoc2024-lambda-role`.
 
 ### Hello World
-10. Run the function: 
-    - Click `Test` > `Create new test`. 
+10. In the `Code` tab, test the default function: 
+    - Click `Test` > `Create new test event`. 
     - Click `Invoke`. 
-7. Change line 4 (TODO) to: `name = event['name']`
+    - Inspect the `Output` for results. 
+7. Change line 4 ("TODO") to: `name = event['name']`
 8. Change the argument to `json.dumps` to: `'Hello, ' + name + '!'`
-9. Click `Deploy` and wait for function to update. 
-10. Run the function: 
-    - Click `Test` > `Create new test`. 
+9. Click `Deploy` to save your changes. Wait for function to update. 
+10. Update the existing test event:
     - Change `key1` to `name`, and `value1` to `you gorgeous cloud user` (or whatever you want).
     - Click `Invoke`. 
 
@@ -78,24 +78,26 @@ aws s3 ls entsoc2024-ecodata-cloud-workshop
     - In another browser tab, navigate to the workshop S3 bucket. 
     - Select `lambda_deployment.zip` and copy the `URL` (not `S3 URI`) to your clipboard. 
     - In the Lambda Console, under the `Code` tab, select `Upload from` > `Amazon S3 location` and paste the URL. Hit `Save`.
-    - Take a minute to look at the new code.
+    - Wait for the function to update, and take a minute to browse the new code.
 2. Configure a new test with the following event: 
+    - where `XX` is your 2-digit guest user number. E.g, `guestuser3` would use `20230103`.
 ``` python
 {
-    "date": "20230X01", 
+    "date": "202301XX", 
     "lt": 0, 
     "ut": 30, 
-    "user": "YOUR INITIALS OR SOMETHING"
+    "user": "YOUR-INITIALS-OR-WHATEVER"
 }
 ```
 
 
-7. Additional Configurations: 
+
+1. Additional Configurations: 
     - Select `Enable VPC`. 
     - VPC: `entsoc2024`. 
     - Subnets: Select all _private_ subnets, and NOT the public subnet. 
     - Security Group: `default` (`sg-067466a5f4c489420`).
-8. 
+2. 
     
 
 
