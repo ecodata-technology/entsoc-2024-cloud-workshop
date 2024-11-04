@@ -80,37 +80,63 @@ aws s3 ls entsoc2024-ecodata-cloud-workshop
     - In the Lambda Console, under the `Code` tab, select `Upload from` > `Amazon S3 location` and paste the URL. Hit `Save`.
     - Wait for the function to update, and take a minute to browse the new code.
 13. Configure a new test: 
-    - Replace the default test event with the following JSON, where `XX` is your 2-digit guest user number. E.g, `guestuser3` would use `20230103`.
+    - Replace the default test event with the following JSON, where `XX` in the date entry is your 2-digit guest user number. E.g, `guestuser03` would use `20030101`.
 ``` python
 {
-    "date": "202301XX", 
-    "lt": 0, 
-    "ut": 30, 
+    "date": "20XX0101", 
+    "temp_low": 0, 
+    "temp_high": 30, 
     "user": "YOUR-INITIALS-OR-WHATEVER"
 }
 ```
    - Click `Invoke` and inspect the `Output` for results.
 
 ### Update Function Config For Phenology Model
-1. Increase system resources: 
+14. Increase system resources: 
     - `Configuration` > `General configuration` > `Edit`.
     - `Memory`: `512` MB. 
     - `Timeout`: `3` min `0` sec. 
     - `Save`. 
-2. Switch to a custom network: 
+15. Switch to a custom network: 
     - `Configuration` > `VPC` > `Edit`. 
     - `VPC`: Name = `entsoc2024`. 
     - `Subnets`: Select all _private_ subnets, and NOT the public subnet. 
     - Security Group: `default` (`sg-067466a5f4c489420`).
     - `Save`
-3. Mount a file system with Python dependencies pre-installed: 
+16. Mount a file system with Python dependencies pre-installed: 
     - `Configuration` > `File systems` > `Add file system`.
     - `EFS file system`: `entsoc2024-efs2`.
     - `Access point`: `entsoc-efs-mp2`.
     - `Local mount path`: `/mnt/python-dependencies`.
     - `Save`.
-    
+17. Point Python to the new dependencies: 
+    - `Configuration` > `Environment variables` > `Edit` > `Add environment variable`.
+    - `Key`: `PYTHONPATH`, `Value`: `/mnt/python-dependencies/lib`.
+    - `Save`.
+18. Test the function with the same event as in step 13 above.
+    - Note: PRISM allows only two downloads from the same IP per day. If you get an error about the download, try another date in your year. 
+19. View the results. 
+    - Navigate to S3 > `entsoc2024-ecodata-cloud-workshop/gdd-rasters/YOUR-USER-VALUE-FROM-TEST`.
+    - Download and view the `.png` file on your local machine.
 
+### Run A Different Model
+
+If you like, go ahead and run a phenology model for an actual insect. Below are example, emprically derived temperature thresholds for a handful of economically important pests in Oregon. 
+
+Again, remember that PRISM only allows two downloads per day from the same IP.
+    
+| Pest Species | Lower Threshold | Upper Threshold |
+|----------|----------|----------|
+| True armyworm | 10 | 29 |
+| Red clover casebearer | 12.3 | 100 |
+| Cereal leaf beetle | 8.9 | 37.8 |
+| Black cutworm | 9.8 | 36 |
+| Codling moth | 10 | 31.1 |
+| Filbertworm| 10 | 33.3 |
+| Cabbage looper | 10| 32.2 |
+| Brown marmorated stink bug| 12.2 | 33.3 |
+| Corn earworm | 12.8 | 33.3 |
+| Spotted wing Drosophila| 10 | 31.1 |
 
 
 

@@ -171,7 +171,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="hello-world" class="level3">
 <h3 class="anchored" data-anchor-id="hello-world">Hello World</h3>
-<ol start="10" type="1">
+<ol start="7" type="1">
 <li>In the <code>Code</code> tab, test the default function:
 <ul>
 <li>Click <code>Test</code> &gt; <code>Create new test event</code>.</li>
@@ -190,7 +190,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="deploy-an-insect-phenology-model" class="level3">
 <h3 class="anchored" data-anchor-id="deploy-an-insect-phenology-model">Deploy An Insect Phenology Model</h3>
-<ol type="1">
+<ol start="12" type="1">
 <li>Deploy the phenology model code:
 <ul>
 <li>In another browser tab, navigate to the workshop S3 bucket.</li>
@@ -200,26 +200,125 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul></li>
 <li>Configure a new test:
 <ul>
-<li>Replace the default test event with the following JSON, where <code>XX</code> is your 2-digit guest user number. E.g, <code>guestuser3</code> would use <code>20230103</code>.</li>
+<li>Replace the default test event with the following JSON, where <code>XX</code> in the date entry is your 2-digit guest user number. E.g, <code>guestuser03</code> would use <code>20030101</code>.</li>
 </ul>
 <div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>{</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a> <span class="st">"date"</span>: <span class="st">"202301XX"</span>, </span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a> <span class="st">"lt"</span>: <span class="dv">0</span>, </span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a> <span class="st">"ut"</span>: <span class="dv">30</span>, </span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a> <span class="st">"user"</span>: <span class="st">"YOUR-INITIALS-OR-WHATEVER"</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ul>
-<li>Click <code>Invoke</code>, and inspect the <code>Output</code> for results.</li>
-</ul></li>
-<li>Additional Configurations:
-<ul>
-<li>Select <code>Enable VPC</code>.</li>
-<li>VPC: <code>entsoc2024</code>.</li>
-<li>Subnets: Select all <em>private</em> subnets, and NOT the public subnet.</li>
-<li>Security Group: <code>default</code> (<code>sg-067466a5f4c489420</code>).</li>
-</ul></li>
-<li></li>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="st">"date"</span>: <span class="st">"20XX0101"</span>, </span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="st">"temp_low"</span>: <span class="dv">0</span>, </span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="st">"temp_high"</span>: <span class="dv">30</span>, </span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="st">"user"</span>: <span class="st">"YOUR-INITIALS-OR-WHATEVER"</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 </ol>
+<ul>
+<li>Click <code>Invoke</code> and inspect the <code>Output</code> for results.</li>
+</ul>
+</section>
+<section id="update-function-config-for-phenology-model" class="level3">
+<h3 class="anchored" data-anchor-id="update-function-config-for-phenology-model">Update Function Config For Phenology Model</h3>
+<ol start="14" type="1">
+<li>Increase system resources:
+<ul>
+<li><code>Configuration</code> &gt; <code>General configuration</code> &gt; <code>Edit</code>.</li>
+<li><code>Memory</code>: <code>512</code> MB.</li>
+<li><code>Timeout</code>: <code>3</code> min <code>0</code> sec.&nbsp;</li>
+<li><code>Save</code>.</li>
+</ul></li>
+<li>Switch to a custom network:
+<ul>
+<li><code>Configuration</code> &gt; <code>VPC</code> &gt; <code>Edit</code>.</li>
+<li><code>VPC</code>: Name = <code>entsoc2024</code>.</li>
+<li><code>Subnets</code>: Select all <em>private</em> subnets, and NOT the public subnet.</li>
+<li>Security Group: <code>default</code> (<code>sg-067466a5f4c489420</code>).</li>
+<li><code>Save</code></li>
+</ul></li>
+<li>Mount a file system with Python dependencies pre-installed:
+<ul>
+<li><code>Configuration</code> &gt; <code>File systems</code> &gt; <code>Add file system</code>.</li>
+<li><code>EFS file system</code>: <code>entsoc2024-efs2</code>.</li>
+<li><code>Access point</code>: <code>entsoc-efs-mp2</code>.</li>
+<li><code>Local mount path</code>: <code>/mnt/python-dependencies</code>.</li>
+<li><code>Save</code>.</li>
+</ul></li>
+<li>Point Python to the new dependencies:
+<ul>
+<li><code>Configuration</code> &gt; <code>Environment variables</code> &gt; <code>Edit</code> &gt; <code>Add environment variable</code>.</li>
+<li><code>Key</code>: <code>PYTHONPATH</code>, <code>Value</code>: <code>/mnt/python-dependencies/lib</code>.</li>
+<li><code>Save</code>.</li>
+</ul></li>
+<li>Test the function with the same event as in step 13 above.
+<ul>
+<li>Note: PRISM allows only two downloads from the same IP per day. If you get an error about the download, try another date in your year.</li>
+</ul></li>
+<li>View the results.
+<ul>
+<li>Navigate to S3 &gt; <code>entsoc2024-ecodata-cloud-workshop/gdd-rasters/YOUR-USER-VALUE-FROM-TEST</code>.</li>
+<li>Download and view the <code>.png</code> file on your local machine.</li>
+</ul></li>
+</ol>
+</section>
+<section id="run-a-different-model" class="level3">
+<h3 class="anchored" data-anchor-id="run-a-different-model">Run A Different Model</h3>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Pest Species</th>
+<th>Lower Threshold</th>
+<th>Upper Threshold</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>True armyworm</td>
+<td>10</td>
+<td>29</td>
+</tr>
+<tr class="even">
+<td>Red clover casebearer</td>
+<td>12.3</td>
+<td>100</td>
+</tr>
+<tr class="odd">
+<td>Cereal leaf beetle</td>
+<td>8.9</td>
+<td>37.8</td>
+</tr>
+<tr class="even">
+<td>Black cutworm</td>
+<td>9.8</td>
+<td>36</td>
+</tr>
+<tr class="odd">
+<td>Codling moth</td>
+<td>10</td>
+<td>31.1</td>
+</tr>
+<tr class="even">
+<td>Filbertworm</td>
+<td>10</td>
+<td>33.3</td>
+</tr>
+<tr class="odd">
+<td>Cabbage looper</td>
+<td>10</td>
+<td>32.2</td>
+</tr>
+<tr class="even">
+<td>Brown marmorated stink bug</td>
+<td>12.2</td>
+<td>33.3</td>
+</tr>
+<tr class="odd">
+<td>Corn earworm</td>
+<td>12.8</td>
+<td>33.3</td>
+</tr>
+<tr class="even">
+<td>Spotted wing Drosophila</td>
+<td>10</td>
+<td>31.1</td>
+</tr>
+</tbody>
+</table>
 </section>
 </section>
 </section>
