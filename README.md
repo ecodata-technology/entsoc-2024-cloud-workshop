@@ -80,16 +80,14 @@ aws s3 ls entsoc2024-ecodata-cloud-workshop
     - In the Lambda Console, under the `Code` tab, select `Upload from` > `Amazon S3 location` and paste the URL. Hit `Save`.
     - Take a minute to look at the new code.
 2. Configure a new test with the following event: 
-    - change the `XX` in `date` to your guestuser number. Eg, if you're `guestuser2`, `date` = `20230102`. 
 ``` python
 {
-    "date": "202301XX", 
+    "date": "20230X01", 
     "lt": 0, 
     "ut": 30, 
     "user": "YOUR INITIALS OR SOMETHING"
 }
 ```
-    
 
 
 7. Additional Configurations: 
