@@ -162,8 +162,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 class="anchored" data-anchor-id="create-a-lambda-function">Create A Lambda Function</h3>
 <ol type="1">
 <li>Navigate to the Lambda service.</li>
-<li>Select <code>Create function</code>.</li>
-<li>Give it a name prefixed with <code>entsoc2024</code> and suffixed with your initials, e.g, <code>entsoc-tef</code>.</li>
+<li>Select <code>Create function</code> &gt; <code>Author from scratch</code>.</li>
+<li>Give it a name prefixed with <code>entsoc2024</code> and suffixed with your initials, e.g, <code>entsoc2024-tef</code>.</li>
 <li>Runtime: <code>Python 3.9</code>.</li>
 <li>Architecture: <code>x86_64</code>.</li>
 <li>Change default execution role: <code>Use an existing role</code> &gt; <code>entsoc2024-lambda-role</code>.</li>
@@ -172,17 +172,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="hello-world" class="level3">
 <h3 class="anchored" data-anchor-id="hello-world">Hello World</h3>
 <ol start="10" type="1">
-<li>Run the function:
+<li>In the <code>Code</code> tab, test the default function:
 <ul>
-<li>Click <code>Test</code> &gt; <code>Create new test</code>.</li>
+<li>Click <code>Test</code> &gt; <code>Create new test event</code>.</li>
 <li>Click <code>Invoke</code>.</li>
+<li>Inspect the <code>Output</code> for results.</li>
 </ul></li>
-<li>Change line 4 (TODO) to: <code>name = event['name']</code></li>
+<li>Change line 4 (“TODO”) to: <code>name = event['name']</code></li>
 <li>Change the argument to <code>json.dumps</code> to: <code>'Hello, ' + name + '!'</code></li>
-<li>Click <code>Deploy</code> and wait for function to update.</li>
-<li>Run the function:
+<li>Click <code>Deploy</code> to save your changes. Wait for function to update.</li>
+<li>Update the existing test event:
 <ul>
-<li>Click <code>Test</code> &gt; <code>Create new test</code>.</li>
 <li>Change <code>key1</code> to <code>name</code>, and <code>value1</code> to <code>you gorgeous cloud user</code> (or whatever you want).</li>
 <li>Click <code>Invoke</code>.</li>
 </ul></li>
@@ -196,17 +196,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>In another browser tab, navigate to the workshop S3 bucket.</li>
 <li>Select <code>lambda_deployment.zip</code> and copy the <code>URL</code> (not <code>S3 URI</code>) to your clipboard.</li>
 <li>In the Lambda Console, under the <code>Code</code> tab, select <code>Upload from</code> &gt; <code>Amazon S3 location</code> and paste the URL. Hit <code>Save</code>.</li>
-<li>Take a minute to look at the new code.</li>
+<li>Wait for the function to update, and take a minute to browse the new code.</li>
 </ul></li>
-<li>Configure a new test with the following event:</li>
-</ol>
+<li>Configure a new test:
+<ul>
+<li>Replace the default test event with the following JSON, where <code>XX</code> is your 2-digit guest user number. E.g, <code>guestuser3</code> would use <code>20230103</code>.</li>
+</ul>
 <div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>{</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"date"</span>: <span class="st">"20230X01"</span>, </span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"lt"</span>: <span class="dv">0</span>, </span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"ut"</span>: <span class="dv">30</span>, </span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"user"</span>: <span class="st">"YOUR INITIALS OR SOMETHING"</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a> <span class="st">"date"</span>: <span class="st">"202301XX"</span>, </span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a> <span class="st">"lt"</span>: <span class="dv">0</span>, </span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a> <span class="st">"ut"</span>: <span class="dv">30</span>, </span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a> <span class="st">"user"</span>: <span class="st">"YOUR-INITIALS-OR-WHATEVER"</span></span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ol start="7" type="1">
+<ul>
+<li>Click <code>Invoke</code>, and inspect the <code>Output</code> for results.</li>
+</ul></li>
 <li>Additional Configurations:
 <ul>
 <li>Select <code>Enable VPC</code>.</li>

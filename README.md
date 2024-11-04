@@ -62,25 +62,25 @@ aws s3 ls entsoc2024-ecodata-cloud-workshop
 6. Change default execution role: `Use an existing role` > `entsoc2024-lambda-role`.
 
 ### Hello World
-10. In the `Code` tab, test the default function: 
+7. In the `Code` tab, test the default function: 
     - Click `Test` > `Create new test event`. 
     - Click `Invoke`. 
     - Inspect the `Output` for results. 
-7. Change line 4 ("TODO") to: `name = event['name']`
-8. Change the argument to `json.dumps` to: `'Hello, ' + name + '!'`
-9. Click `Deploy` to save your changes. Wait for function to update. 
-10. Update the existing test event:
+8. Change line 4 ("TODO") to: `name = event['name']`
+9. Change the argument to `json.dumps` to: `'Hello, ' + name + '!'`
+10. Click `Deploy` to save your changes. Wait for function to update. 
+11. Update the existing test event:
     - Change `key1` to `name`, and `value1` to `you gorgeous cloud user` (or whatever you want).
     - Click `Invoke`. 
 
 ### Deploy An Insect Phenology Model
-1. Deploy the phenology model code: 
+12. Deploy the phenology model code: 
     - In another browser tab, navigate to the workshop S3 bucket. 
     - Select `lambda_deployment.zip` and copy the `URL` (not `S3 URI`) to your clipboard. 
     - In the Lambda Console, under the `Code` tab, select `Upload from` > `Amazon S3 location` and paste the URL. Hit `Save`.
     - Wait for the function to update, and take a minute to browse the new code.
-2. Configure a new test with the following event: 
-    - where `XX` is your 2-digit guest user number. E.g, `guestuser3` would use `20230103`.
+13. Configure a new test: 
+    - Replace the default test event with the following JSON, where `XX` is your 2-digit guest user number. E.g, `guestuser3` would use `20230103`.
 ``` python
 {
     "date": "202301XX", 
@@ -89,15 +89,26 @@ aws s3 ls entsoc2024-ecodata-cloud-workshop
     "user": "YOUR-INITIALS-OR-WHATEVER"
 }
 ```
+   - Click `Invoke` and inspect the `Output` for results.
 
-
-
-1. Additional Configurations: 
-    - Select `Enable VPC`. 
-    - VPC: `entsoc2024`. 
-    - Subnets: Select all _private_ subnets, and NOT the public subnet. 
+### Update Function Config For Phenology Model
+1. Increase system resources: 
+    - `Configuration` > `General configuration` > `Edit`.
+    - `Memory`: `512` MB. 
+    - `Timeout`: `3` min `0` sec. 
+    - `Save`. 
+2. Switch to a custom network: 
+    - `Configuration` > `VPC` > `Edit`. 
+    - `VPC`: Name = `entsoc2024`. 
+    - `Subnets`: Select all _private_ subnets, and NOT the public subnet. 
     - Security Group: `default` (`sg-067466a5f4c489420`).
-2. 
+    - `Save`
+3. Mount a file system with Python dependencies pre-installed: 
+    - `Configuration` > `File systems` > `Add file system`.
+    - `EFS file system`: `entsoc2024-efs2`.
+    - `Access point`: `entsoc-efs-mp2`.
+    - `Local mount path`: `/mnt/python-dependencies`.
+    - `Save`.
     
 
 
