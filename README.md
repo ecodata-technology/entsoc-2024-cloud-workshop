@@ -124,6 +124,8 @@ aws s3 ls entsoc2024-ecodata-cloud-workshop
 If you like, go ahead and run a phenology model for an actual insect. Below are example, emprically derived temperature thresholds for a handful of economically important pests in Oregon. 
 
 Again, remember that PRISM only allows two downloads per day from the same IP.
+
+ Hello ```python copy me ``` world. 
     
 | Pest Species | Lower Threshold | Upper Threshold |
 |----------|----------|----------|

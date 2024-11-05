@@ -36,9 +36,13 @@ def lambda_handler(event, context):
     os.makedirs(gdd_dir)
 
     ## Common Objects
+   
+    # configure for GET request trigger 
+    if 'queryStringParameters' in event:
+        event = event['queryStringParameters']
     target_date = event['date']
-    lt = event['temp_low']
-    ut = event['temp_high']
+    lt = int(event['temp_low'])
+    ut = int(event['temp_high'])
     user = event['user']
     raster_name = f'gdd_raster_user={user}_date={target_date}_lt={lt}_ut={ut}.nc'
     local_raster_path = os.path.join(gdd_dir, raster_name)
