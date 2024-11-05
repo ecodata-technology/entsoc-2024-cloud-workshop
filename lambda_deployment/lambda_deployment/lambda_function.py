@@ -1,3 +1,5 @@
+import sys
+sys.path.append('/mnt/ecodata2024-efs/lib')
 import json
 import shutil
 import urllib
@@ -23,23 +25,15 @@ def lambda_handler(event, context):
         print('- Error:', e)
         raise e
 
-    ## Variables 
     print("Loading Common Variables and Objects")
-    # storage_dir = "/home/ec2-user/prism-etl" # do not change me
-    storage_dir = "/tmp/prism-etl" # for lambda 
+    ## Common objects
     weather_var_list = ['tmin', 'tmax'] 
     base_url = 'https://services.nacse.org/prism/data/public/4km'
     format = 'nc'
     s3_bucket = 'entsoc2024-ecodata-cloud-workshop'
     s3_client = boto3.client('s3')
-    gdd_dir = os.path.join(storage_dir, 'gdd')
-    if os.path.exists(gdd_dir):
-        shutil.rmtree(gdd_dir)
-    os.makedirs(gdd_dir)
 
-    ## Common Objects
-   
-    # configure for GET request trigger 
+    # event parameters 
     if 'queryStringParameters' in event:
         event = event['queryStringParameters']
     target_date = event['date']
@@ -47,11 +41,13 @@ def lambda_handler(event, context):
     ut = int(event['temp_high'])
     user = event['user']
     state = event['state']
-    shp = gpd.read_file(f'zip+s3://entsoc2024-ecodata-cloud-workshop/tl_2024_us_state.zip')
-    # shp = gpd.read_file('/mnt/ecodata2024-efs/tl_2024_us_state.zip')
-    shp_state = shp.loc[lambda x: x.NAME == state]
     
     # paths
+    storage_dir = "/tmp/prism-etl" # for lambda 
+    gdd_dir = os.path.join(storage_dir, 'gdd')
+    if os.path.exists(gdd_dir):
+        shutil.rmtree(gdd_dir)
+    os.makedirs(gdd_dir)
     raster_name = f'gdd_raster_user={user}_date={target_date}_lt={lt}_ut={ut}.nc'
     local_raster_path = os.path.join(gdd_dir, raster_name)
     png_name = f'gdd_raster_user={user}_date={target_date}_lt={lt}_ut={ut}.png'
@@ -93,10 +89,14 @@ def lambda_handler(event, context):
         
         print(f'- Successfully pulled {var}')
         
-    # Load PRISM rasters and clip to OR
+    # Load PRISM rasters and clip to state
+    print(f'Loading PRISM rasters and clipping to {state}.') 
     prism_dict = {} 
+    shp = gpd.read_file(f'zip+s3://entsoc2024-ecodata-cloud-workshop/tl_2024_us_state.zip')
+    # shp = gpd.read_file('/mnt/ecodata2024-efs/tl_2024_us_state.zip')
+    shp_state = shp.loc[lambda x: x.NAME == state]
     for var in ['tmin', 'tmax']:
-        print(f'- Clipping {var} raster to bounding box.')
+        print(f'- Clipping {var} raster.')
         # load var
         dest_dir = os.path.join(storage_dir, var, target_date)
         file_name = f'PRISM_{var}_stable_4kmD2_{target_date}_nc.nc'
@@ -109,14 +109,6 @@ def lambda_handler(event, context):
 
     # create GDD artifacts
     print('Creating GDD artifacts.')
-    # prism_dict = {} 
-
-    for var in weather_var_list:
-
-        print(f'- Loading {var} NetCDF file.')
-        file_name = f'PRISM_{var}_stable_4kmD2_{target_date}_nc.nc'
-        file_path = os.path.join(storage_dir, var, target_date, file_name)
-        prism_dict[var] = xra.open_dataset(file_path, engine = 'netcdf4').Band1
 
     # get gdd layer
     print(f'- Setting up degree day calculator with lt = {lt} and ut = {ut}')
@@ -142,8 +134,3 @@ def lambda_handler(event, context):
         'statusCode': 200,
         'body': json.dumps('Computation complete!')
     }
-
-if __name__ == "__main__":
-
-    event = {'temp_high': 30, 'temp_low': 8, 'date': '20211022', 'user': 'tfarkas'}
-    print(lambda_handler(event=event, context='b'))
