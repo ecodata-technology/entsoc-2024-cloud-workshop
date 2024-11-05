@@ -56,8 +56,8 @@ def lambda_handler(event, context):
     s3_png_loc = f'gdd_rasters/{user}/{png_name}'
         
 
+    print(f"Pulling weather data from PRISM for {target_date}.")
     for var in weather_var_list:
-        print(f"Pulling {var} data")
         dest_dir = os.path.join(storage_dir, var, target_date)
         dest_file = os.path.join(dest_dir, f'{var}_{target_date}.zip')
         if not os.path.exists(dest_dir):
