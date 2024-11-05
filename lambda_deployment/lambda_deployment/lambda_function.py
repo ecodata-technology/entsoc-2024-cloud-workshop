@@ -6,7 +6,9 @@ import zipfile
 import boto3
 from degree_day import degree_day as dd
 import xarray as xra
+import rioxarray
 import matplotlib.pyplot as plt
+import geopandas as gpd
 
 
 def lambda_handler(event, context):
@@ -44,6 +46,12 @@ def lambda_handler(event, context):
     lt = int(event['temp_low'])
     ut = int(event['temp_high'])
     user = event['user']
+    state = event['state']
+    shp = gpd.read_file(f'zip+s3://entsoc2024-ecodata-cloud-workshop/tl_2024_us_state.zip')
+    # shp = gpd.read_file('/mnt/ecodata2024-efs/tl_2024_us_state.zip')
+    shp_state = shp.loc[lambda x: x.NAME == state]
+    
+    # paths
     raster_name = f'gdd_raster_user={user}_date={target_date}_lt={lt}_ut={ut}.nc'
     local_raster_path = os.path.join(gdd_dir, raster_name)
     png_name = f'gdd_raster_user={user}_date={target_date}_lt={lt}_ut={ut}.png'
@@ -85,9 +93,23 @@ def lambda_handler(event, context):
         
         print(f'- Successfully pulled {var}')
         
+    # Load PRISM rasters and clip to OR
+    prism_dict = {} 
+    for var in ['tmin', 'tmax']:
+        print(f'- Clipping {var} raster to bounding box.')
+        # load var
+        dest_dir = os.path.join(storage_dir, var, target_date)
+        file_name = f'PRISM_{var}_stable_4kmD2_{target_date}_nc.nc'
+        file_path = os.path.join(dest_dir, file_name)
+        raw_raster = rioxarray.open_rasterio(file_path)
+        or_raster = raw_raster.rio.clip(shp_state.geometry, drop = True)
+        or_raster = or_raster.where(or_raster != -9999)
+        prism_dict[var] = or_raster.drop_vars('band').squeeze()
+        del raw_raster, or_raster
+
     # create GDD artifacts
     print('Creating GDD artifacts.')
-    prism_dict = {} 
+    # prism_dict = {} 
 
     for var in weather_var_list:
 
