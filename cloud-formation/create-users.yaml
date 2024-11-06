@@ -1,0 +1,14 @@
+Resources:
+  createUser:
+    Type: AWS::IAM::User
+    Properties:
+      LoginProfile:
+        Password: EntSoc2024!
+        PasswordResetRequired: false
+      UserName: clouduser02
+  addUserToGroup:
+    Type: AWS::IAM::UserToGroupAddition
+    Properties:
+      GroupName: EntSoc2024Workshops
+      Users:
+      - !Ref createUser
