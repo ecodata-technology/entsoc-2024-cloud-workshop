@@ -92,17 +92,43 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>IAM username: guestuser1 (2,3, …)</li>
 <li>Password: Ask Tim.</li>
 </ul></li>
-<li>Take 2 minutes to browse Services (top left of nav bar).</li>
+<li>Take 1 minute to browse Services (top left of nav bar).</li>
+</ol>
+</section>
+<section id="simple-storage-service-s3---5-minutes" class="level2">
+<h2 class="anchored" data-anchor-id="simple-storage-service-s3---5-minutes">Simple Storage Service (S3) - 5 minutes</h2>
+<ol type="1">
+<li>Navigate to S3 console.</li>
+<li>Navigate to <code>entsoc2024-ecodata-cloud-workshop/uploads</code>.</li>
+<li>Download a file from to your local machine.
+<ul>
+<li>Select the checkbox for your desired file.</li>
+<li>Click <code>Download</code>.</li>
+</ul></li>
+<li>Create a new folder:
+<ul>
+<li><code>Create folder</code>.</li>
+<li>Enter a unique folder name, such as your initials.</li>
+<li>Don’t specifiy an encryption key.</li>
+<li><code>Create folder</code>.</li>
+</ul></li>
+<li>Upload a small file from your local machine.
+<ul>
+<li>Note: Other workshop participants will have access to your uploaded files.</li>
+<li><code>Upload</code> &gt; <code>Add files</code> &gt; Select file &gt; <code>Upload</code></li>
+<li>Wait for the upload to finish, then close the upload details page.</li>
+</ul></li>
 </ol>
 </section>
 <section id="elastic-cloud-compute-ec2" class="level2">
 <h2 class="anchored" data-anchor-id="elastic-cloud-compute-ec2">Elastic Cloud Compute (EC2)</h2>
-<section id="launch-an-ec2-instance" class="level3">
-<h3 class="anchored" data-anchor-id="launch-an-ec2-instance">Launch An EC2 Instance</h3>
+<section id="launch-an-ec2-instance---5-min" class="level3">
+<h3 class="anchored" data-anchor-id="launch-an-ec2-instance---5-min">Launch An EC2 Instance - 5 min</h3>
 <ol type="1">
 <li>Navigate to EC2 Dashboard, then <code>Instances</code> &gt; <code>Instances</code> on the left nav bar.</li>
+<li>Make sure you are in region <code>N. Virginia</code> (top nav bar).</li>
 <li>Select <code>Launch instances</code>.</li>
-<li>Name your instance with your initials: e.g., <code>entsoc-tef</code>.</li>
+<li>Name your instance with your initials: e.g., <code>entsoc2024-tef</code>.</li>
 <li>Application and OS Images:
 <ul>
 <li>Select <code>Ubuntu</code> card.</li>
@@ -110,7 +136,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Architecture: <code>64-bit (x84)</code>.</li>
 </ul></li>
 <li>Instance Type: <code>t2.micro</code>.</li>
-<li>Key Pair: <code>Proceed without a key pair</code></li>
+<li>Key Pair: <code>Proceed without a key pair</code>.</li>
 <li>Network Settings: Select “Existing security group” &gt; Check <code>entsoc2024-guest-ec2</code> box.</li>
 <li>Configure Storage: <code>8 GiB gp3</code>.</li>
 <li>Advanced Settings
@@ -120,8 +146,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Return to <code>Instances</code> &gt; <code>Instances</code> and wait for your Instance State to be <code>Running</code>, about 30 seconds. You may need to refresh the browser.</li>
 </ol>
 </section>
-<section id="explore-and-connect-to-your-ec2-instance" class="level3">
-<h3 class="anchored" data-anchor-id="explore-and-connect-to-your-ec2-instance">Explore and Connect To Your EC2 Instance</h3>
+<section id="explore-and-connect-to-your-ec2-instance---5-min" class="level3">
+<h3 class="anchored" data-anchor-id="explore-and-connect-to-your-ec2-instance---5-min">Explore and Connect To Your EC2 Instance - 5 min</h3>
 <ol type="1">
 <li>Click your <code>Instance ID</code> to view a summary of your instance configuration.</li>
 <li>Connect to your Instance:
@@ -134,22 +160,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Submit command <code>ls -al</code> to see contents of your home directory.</li>
 </ol>
 </section>
-<section id="download-a-file-from-s3" class="level3">
-<h3 class="anchored" data-anchor-id="download-a-file-from-s3">Download A File From S3</h3>
+<section id="use-the-aws-cli---10-min" class="level3">
+<h3 class="anchored" data-anchor-id="use-the-aws-cli---10-min">Use the AWS CLI - 10 min</h3>
 <ol type="1">
-<li>Install the AWS Command Line Interface (CLI):</li>
-</ol>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> snap install aws-cli <span class="at">--classic</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ol start="2" type="1">
+<li>Install the AWS Command Line Interface (CLI): <code>sudo snap install aws-cli --classic</code></li>
 <li>Check the CLI is installed: <code>aws --version</code>.</li>
 <li>List the S3 buckets in your account: <code>aws s3 ls</code>.</li>
-<li>List the contents of the workshop bucket:</li>
-</ol>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">aws</span> s3 ls entsoc2024-ecodata-cloud-workshop </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ol start="5" type="1">
-<li>Download the deployment package from the bucket:
+<li>List the contents of the workshop bucket: <code>aws s3 ls entsoc2024-ecodata-cloud-workshop</code></li>
+<li>Download a file from S3:
 <ul>
-<li>Get the deployment package URI from the S3 Console.</li>
+<li>Get the S3 URI of your desired file from the S3 Console.</li>
 <li>Run <code>aws s3 cp &lt;S3 URI&gt; .</code> to download the package to your home directory. (Don’t forget the <code>.</code> at the end of the command - it means “current directory”.)</li>
 <li>Check the download was successful with <code>ls -al</code>.</li>
 </ul></li>
@@ -158,8 +178,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="serverless-compute-with-aws-lambda-functions" class="level2">
 <h2 class="anchored" data-anchor-id="serverless-compute-with-aws-lambda-functions">Serverless Compute with AWS Lambda Functions</h2>
-<section id="create-a-lambda-function" class="level3">
-<h3 class="anchored" data-anchor-id="create-a-lambda-function">Create A Lambda Function</h3>
+<section id="create-a-lambda-function---5-min" class="level3">
+<h3 class="anchored" data-anchor-id="create-a-lambda-function---5-min">Create A Lambda Function - 5 min</h3>
 <ol type="1">
 <li>Navigate to the Lambda service.</li>
 <li>Select <code>Create function</code> &gt; <code>Author from scratch</code>.</li>
@@ -167,30 +187,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Runtime: <code>Python 3.9</code>.</li>
 <li>Architecture: <code>x86_64</code>.</li>
 <li>Change default execution role: <code>Use an existing role</code> &gt; <code>entsoc2024-lambda-role</code>.</li>
+<li>Click <code>Create function</code>.</li>
 </ol>
 </section>
-<section id="hello-world" class="level3">
-<h3 class="anchored" data-anchor-id="hello-world">Hello World</h3>
-<ol start="7" type="1">
+<section id="hello-world---5-min" class="level3">
+<h3 class="anchored" data-anchor-id="hello-world---5-min">Hello World - 5 min</h3>
+<ol type="1">
 <li>In the <code>Code</code> tab, test the default function:
 <ul>
 <li>Click <code>Test</code> &gt; <code>Create new test event</code>.</li>
-<li>Click <code>Invoke</code>.</li>
-<li>Inspect the <code>Output</code> for results.</li>
+<li>Click <code>Invoke</code> and inspect the <code>Output</code> for results.</li>
 </ul></li>
-<li>Change line 4 (“TODO”) to: <code>name = event['name']</code></li>
+<li>Change line 4 (“#TODO”) to: <code>name = event['name']</code></li>
 <li>Change the argument to <code>json.dumps</code> to: <code>'Hello, ' + name + '!'</code></li>
 <li>Click <code>Deploy</code> to save your changes. Wait for function to update.</li>
 <li>Update the existing test event:
 <ul>
 <li>Change <code>key1</code> to <code>name</code>, and <code>value1</code> to <code>you gorgeous cloud user</code> (or whatever you want).</li>
-<li>Click <code>Invoke</code>.</li>
+<li>Click <code>Invoke</code> and inspect the <code>Output</code> for results.</li>
 </ul></li>
 </ol>
 </section>
-<section id="deploy-an-insect-phenology-model" class="level3">
-<h3 class="anchored" data-anchor-id="deploy-an-insect-phenology-model">Deploy An Insect Phenology Model</h3>
-<ol start="12" type="1">
+<section id="deploy-an-insect-phenology-model---5-min" class="level3">
+<h3 class="anchored" data-anchor-id="deploy-an-insect-phenology-model---5-min">Deploy An Insect Phenology Model - 5 min</h3>
+<ol type="1">
 <li>Deploy the phenology model code:
 <ul>
 <li>In another browser tab, navigate to the workshop S3 bucket.</li>
@@ -202,20 +222,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul>
 <li>Replace the default test event with the following JSON, where <code>XX</code> in the date entry is your 2-digit guest user number. E.g, <code>guestuser03</code> would use <code>20030101</code>.</li>
 </ul>
-<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>{</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="st">"date"</span>: <span class="st">"20XX0101"</span>, </span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="st">"temp_low"</span>: <span class="dv">0</span>, </span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="st">"temp_high"</span>: <span class="dv">30</span>, </span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="st">"user"</span>: <span class="st">"YOUR-INITIALS-OR-WHATEVER"</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
-</ol>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a> <span class="st">"date"</span>: <span class="st">"20XX0101"</span>, </span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a> <span class="st">"state"</span>: <span class="st">"Arizona"</span>,</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a> <span class="st">"temp_low"</span>: <span class="dv">0</span>, </span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a> <span class="st">"temp_high"</span>: <span class="dv">30</span>, </span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a> <span class="st">"user"</span>: <span class="st">"YOUR-INITIALS-OR-WHATEVER"</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
 <li>Click <code>Invoke</code> and inspect the <code>Output</code> for results.</li>
-</ul>
+</ul></li>
+</ol>
 </section>
-<section id="update-function-config-for-phenology-model" class="level3">
-<h3 class="anchored" data-anchor-id="update-function-config-for-phenology-model">Update Function Config For Phenology Model</h3>
-<ol start="14" type="1">
+<section id="update-function-config-for-phenology-model---5-min" class="level3">
+<h3 class="anchored" data-anchor-id="update-function-config-for-phenology-model---5-min">Update Function Config For Phenology Model - 5 min</h3>
+<ol type="1">
 <li>Increase system resources:
 <ul>
 <li><code>Configuration</code> &gt; <code>General configuration</code> &gt; <code>Edit</code>.</li>
@@ -239,12 +260,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><code>Local mount path</code>: <code>/mnt/python-dependencies</code>.</li>
 <li><code>Save</code>.</li>
 </ul></li>
-<li>Point Python to the new dependencies:
-<ul>
-<li><code>Configuration</code> &gt; <code>Environment variables</code> &gt; <code>Edit</code> &gt; <code>Add environment variable</code>.</li>
-<li><code>Key</code>: <code>PYTHONPATH</code>, <code>Value</code>: <code>/mnt/python-dependencies/lib</code>.</li>
-<li><code>Save</code>.</li>
-</ul></li>
 <li>Test the function with the same event as in step 13 above.
 <ul>
 <li>Note: PRISM allows only two downloads from the same IP per day. If you get an error about the download, try another date in your year.</li>
@@ -256,11 +271,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul></li>
 </ol>
 </section>
-<section id="run-a-different-model" class="level3">
-<h3 class="anchored" data-anchor-id="run-a-different-model">Run A Different Model</h3>
-<p>If you like, go ahead and run a phenology model for an actual insect. Below are example, emprically derived temperature thresholds for a handful of economically important pests in Oregon.</p>
+<section id="run-a-different-model---5-min" class="level3">
+<h3 class="anchored" data-anchor-id="run-a-different-model---5-min">Run A Different Model - 5 min</h3>
+<p>If you like, go ahead and run a phenology model for an actual insect. Below are example, emprically derived temperature thresholds for a handful of economically important pest, care of Seth Dorman (ARS / Oregon State University). The models should be most accurate for the state of Oregon, but you can change the state to anything you like.</p>
 <p>Again, remember that PRISM only allows two downloads per day from the same IP.</p>
-<p>Hello <code>python copy me</code> world.</p>
 <table class="table">
 <thead>
 <tr class="header">
@@ -322,6 +336,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 </tbody>
 </table>
+</section>
+<section id="trigger-your-function-with-an-http-request---5-min" class="level3">
+<h3 class="anchored" data-anchor-id="trigger-your-function-with-an-http-request---5-min">Trigger Your Function With An HTTP Request - 5 min</h3>
+<ol type="1">
+<li>Configure a URL trigger:
+<ul>
+<li><code>Configuration</code> &gt; <code>Function URL</code> &gt; <code>Create function URL</code>.</li>
+<li><code>Auth type</code>: None.</li>
+<li><code>Save</code>.</li>
+</ul></li>
+<li>Copy and paste your function URL to a browser tab.</li>
+<li>Input the event parameters as a query string: e.g., <code>?date=20230101&amp;state=New%20Mexico&amp;temp_low=10&amp;temp_high=29&amp;user=gorgeousclouduser</code>.</li>
+<li>Submit the request and wait for the results in the browser page.</li>
+<li>Look in S3 for your results.</li>
+</ol>
 </section>
 </section>
 </section>

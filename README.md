@@ -104,20 +104,20 @@ Author: Tim Farkas, EcoData Technology
 ### Update Function Config For Phenology Model - 5 min
 1. Increase system resources: 
     - `Configuration` > `General configuration` > `Edit`.
-    - `Memory`: `512` MB. 
-    - `Timeout`: `3` min `0` sec. 
+    - Memory: `1024` MB. 
+    - Timeout: `3` min `0` sec. 
     - `Save`. 
 2. Switch to a custom network: 
     - `Configuration` > `VPC` > `Edit`. 
-    - `VPC`: Name = `entsoc2024`. 
-    - `Subnets`: Select all _private_ subnets, and NOT the public subnet. 
+    - VPC: Name = `entsoc2024`. 
+    - Subnets: Select all _private_ subnets, and NOT the public subnet. 
     - Security Group: `default` (`sg-067466a5f4c489420`).
     - `Save`
 3. Mount a file system with Python dependencies pre-installed: 
     - `Configuration` > `File systems` > `Add file system`.
-    - `EFS file system`: `entsoc2024-efs2`.
-    - `Access point`: `entsoc-efs-mp2`.
-    - `Local mount path`: `/mnt/python-dependencies`.
+    - EFS file system: `entsoc2024-efs2`.
+    - Access point: `entsoc-efs-mp2`.
+    - Local mount path: `/mnt/python-dependencies`.
     - `Save`.
 4. Test the function with the same event as in step 13 above.
     - Note: PRISM allows only two downloads from the same IP per day. If you get an error about the download, try another date in your year. 
