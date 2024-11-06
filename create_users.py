@@ -1,8 +1,9 @@
+import os 
 import pulumi
 import pulumi_aws as aws
 
-user_group_name = "existingUserGroup"
-user_password = "YourSecurePassword123!"
+user_group_name = 'EntSoc2024Workshops' 
+user_password = os.environ['ENTSOC_USER_PWD']
 
 # Create IAM Users
 users = []

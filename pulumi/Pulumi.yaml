@@ -1,0 +1,11 @@
+name: entsoc2024-users
+runtime:
+  name: python
+  options:
+    toolchain: pip
+    virtualenv: venv
+description: 'Create 25 IAM users '
+config:
+  pulumi:tags:
+    value:
+      pulumi:template: https://www.pulumi.com/ai/api/project/91aba23d-9557-461f-98d6-04b379d8063f.zip
