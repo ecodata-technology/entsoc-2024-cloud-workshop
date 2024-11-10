@@ -1,5 +1,5 @@
 import sys
-sys.path.append('/mnt/ecodata2024-efs/lib')
+sys.path.append('/mnt/entsoc2024-efs/lib')
 import json
 import shutil
 import urllib

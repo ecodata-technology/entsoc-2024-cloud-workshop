@@ -64,6 +64,7 @@ Author: Tim Farkas, EcoData Technology
     - Get the S3 URI of your desired file from the S3 Console. 
     - Run `aws s3 cp <S3 URI> .` to download the package to your home directory. (Don't forget the `.` at the end of the command - it means "current directory".)
     - Check the download was successful with `ls -al`. 
+6. Stop your instance in the Console: Select instance > `Instance state` > `Stop instance` > `Stop`. 
 
 ## Serverless Compute with AWS Lambda Functions
 ### Create A Lambda Function
@@ -86,26 +87,7 @@ Author: Tim Farkas, EcoData Technology
     - Change `key1` to `name`, and `value1` to `you gorgeous cloud user` (or whatever you want).
     - Click `Invoke` and inspect the `Output` for results. 
 
-### Deploy An Insect Phenology Model
-1. Deploy the phenology model code: 
-    - In another browser tab, navigate to the workshop S3 bucket. 
-    - Select `lambda_deployment.zip` and copy the `URL` (not `S3 URI`) to your clipboard. 
-    - In the Lambda Console, under the `Code` tab, select `Upload from` > `Amazon S3 location` and paste the URL. Hit `Save`.
-    - Wait for the function to update, and take a minute to browse the new code.
-2. Configure a new test: 
-    - Replace the default test event with the following JSON, where `XX` in the date entry is your 2-digit guest user number. E.g, `guestuser03` would use `20030101`.
-``` python
-{
-    "date": "20XX0101", 
-    "state": "Arizona",
-    "temp_low": 0, 
-    "temp_high": 30, 
-    "user": "YOUR-INITIALS-OR-WHATEVER"
-}
-```
-   - Click `Invoke` and inspect the `Output` for results.
-
-### Update Function Config For Phenology Model - 5 min
+### Update Function Config For A Phenology Model 
 1. Increase system resources: 
     - `Configuration` > `General configuration` > `Edit`.
     - Memory: `1024` MB. 
@@ -114,7 +96,7 @@ Author: Tim Farkas, EcoData Technology
 2. Switch to a custom network: 
     - `Configuration` > `VPC` > `Edit`. 
     - VPC: Name = `entsoc2024`. 
-    - Subnets: Select all _private_ subnets, and NOT the public subnet. 
+    - Subnets: Select all _private_ subnets and NOT the public subnet. 
     - Security Group: `default` (`sg-067466a5f4c489420`).
     - `Save`
 3. Mount a file system with Python dependencies pre-installed: 
@@ -123,13 +105,32 @@ Author: Tim Farkas, EcoData Technology
     - Access point: `entsoc-efs-mp2`.
     - Local mount path: `/mnt/ecodata2024-efs`.
     - `Save`.
-4. Test the function with the same event as in step 13 above.
-    - Note: PRISM allows only two downloads from the same IP per day. If you get an error about the download, try another date in your year. 
-5. View the results. 
-    - Navigate to S3 > `entsoc2024-ecodata-cloud-workshop/gdd-rasters/YOUR-USER-VALUE-FROM-TEST`.
+
+### Deploy An Insect Phenology Model
+1. Deploy the phenology model code: 
+    - In another browser tab, navigate to the workshop S3 bucket. 
+    - Select `lambda_deployment.zip` and copy the `URL` (not `S3 URI`) to your clipboard. 
+    - In the Lambda Console, under the `Code` tab, select `Upload from` > `Amazon S3 location` and paste the URL. Hit `Save`.
+    - Wait for the function to update, and take a minute to browse the new code.
+2. Configure a new test: 
+    - Replace the default test event with JSON below, but where `AA` in the date entry is your 2-digit table number, and `BB` is the last digit of your user number + 1. E.g, `cloudUser3` would use `20000401`. `cloudUser29` would use `20021001`. (Sorry, this is a little complicated). 
+
+``` python
+{
+    "date": "20AABB01", 
+    "state": "Arizona",
+    "temp_low": 0, 
+    "temp_high": 30, 
+    "user": "YOUR-INITIALS-OR-WHATEVER"
+}
+```
+   - Click `Invoke` and inspect the `Output` for results.
+   - Note: PRISM allows only two downloads from the same IP per day. If you get an error about the download, try another date in your year and month. 
+3. View the results. 
+    - Navigate to S3 > `entsoc2024-ecodata-cloud-workshop/gdd-rasters/YOUR-USER-VALUE-FROM-TEST-EVENT`.
     - Download and view the `.png` file on your local machine.
 
-### Run A Different Model - 5 min
+### Run A Different Model
 
 If you like, go ahead and run a phenology model for an actual insect. Below are example, emprically derived temperature thresholds for a handful of economically important pest, care of Seth Dorman (ARS / Oregon State University). The models should be most accurate for the state of Oregon, but you can change the state to anything you like. 
 
@@ -148,7 +149,7 @@ Again, remember that PRISM only allows two downloads per day from the same IP.
 | Corn earworm | 12.8 | 33.3 |
 | Spotted wing Drosophila| 10 | 31.1 |
 
-### Trigger Your Function With An HTTP Request - 5 min
+### Trigger Your Function With An HTTP Request
 1. Configure a URL trigger: 
     - `Configuration` > `Function URL` > `Create function URL`. 
     - `Auth type`: None.
