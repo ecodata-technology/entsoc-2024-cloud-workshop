@@ -86,7 +86,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="getting-started" class="level2">
 <h2 class="anchored" data-anchor-id="getting-started">Getting Started</h2>
 <ol type="1">
-<li>Log in to AWS console with <a href="https://tinyurl.com/entsoc2024-cloud-workshop">this login</a>
+<li>Log in to AWS console with <a href="https://440377999911.signin.aws.amazon.com/console">this login</a>
 <ul>
 <li>AWS Account #: 440377999911</li>
 <li>IAM username: guestuser1 (2,3, …)</li>
@@ -139,10 +139,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Key Pair: <code>Proceed without a key pair</code>.</li>
 <li>Network Settings: Select “Existing security group” &gt; Check <code>entsoc2024-guest-ec2</code> box.</li>
 <li>Configure Storage: <code>8 GiB gp3</code>.</li>
-<li>Advanced Settings
+<li>Advanced Details:
 <ul>
 <li>IAM Instance Profile: <code>entsoc2024-ec2-instance-profile-s3-only</code></li>
 </ul></li>
+<li>Select <code>Launch Instance</code>.</li>
 <li>Return to <code>Instances</code> &gt; <code>Instances</code> and wait for your Instance State to be <code>Running</code>, about 30 seconds. You may need to refresh the browser.</li>
 </ol>
 </section>
@@ -198,7 +199,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Click <code>Test</code> &gt; <code>Create new test event</code>.</li>
 <li>Click <code>Invoke</code> and inspect the <code>Output</code> for results.</li>
 </ul></li>
-<li>Change line 4 (“#TODO”) to: <code>name = event['name']</code></li>
+<li>Change line 4 (“#TODO”) to: <code>name = event['name']</code>. Preserve the indendataion!</li>
 <li>Change the argument to <code>json.dumps</code> to: <code>'Hello, ' + name + '!'</code></li>
 <li>Click <code>Deploy</code> to save your changes. Wait for function to update.</li>
 <li>Update the existing test event:
@@ -240,24 +241,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Increase system resources:
 <ul>
 <li><code>Configuration</code> &gt; <code>General configuration</code> &gt; <code>Edit</code>.</li>
-<li><code>Memory</code>: <code>512</code> MB.</li>
-<li><code>Timeout</code>: <code>3</code> min <code>0</code> sec.&nbsp;</li>
+<li>Memory: <code>1024</code> MB.</li>
+<li>Timeout: <code>3</code> min <code>0</code> sec.&nbsp;</li>
 <li><code>Save</code>.</li>
 </ul></li>
 <li>Switch to a custom network:
 <ul>
 <li><code>Configuration</code> &gt; <code>VPC</code> &gt; <code>Edit</code>.</li>
-<li><code>VPC</code>: Name = <code>entsoc2024</code>.</li>
-<li><code>Subnets</code>: Select all <em>private</em> subnets, and NOT the public subnet.</li>
+<li>VPC: Name = <code>entsoc2024</code>.</li>
+<li>Subnets: Select all <em>private</em> subnets, and NOT the public subnet.</li>
 <li>Security Group: <code>default</code> (<code>sg-067466a5f4c489420</code>).</li>
 <li><code>Save</code></li>
 </ul></li>
 <li>Mount a file system with Python dependencies pre-installed:
 <ul>
 <li><code>Configuration</code> &gt; <code>File systems</code> &gt; <code>Add file system</code>.</li>
-<li><code>EFS file system</code>: <code>entsoc2024-efs2</code>.</li>
-<li><code>Access point</code>: <code>entsoc-efs-mp2</code>.</li>
-<li><code>Local mount path</code>: <code>/mnt/python-dependencies</code>.</li>
+<li>EFS file system: <code>entsoc2024-efs2</code>.</li>
+<li>Access point: <code>entsoc-efs-mp2</code>.</li>
+<li>Local mount path: <code>/mnt/ecodata2024-efs</code>.</li>
 <li><code>Save</code>.</li>
 </ul></li>
 <li>Test the function with the same event as in step 13 above.

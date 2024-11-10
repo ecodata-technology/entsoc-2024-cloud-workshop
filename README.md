@@ -2,9 +2,9 @@
 Author: Tim Farkas, EcoData Technology
 
 ## Getting Started
-1. Log in to AWS console with [this login](https://tinyurl.com/entsoc2024-cloud-workshop)
+1. Log in to AWS console with [this login](https://440377999911.signin.aws.amazon.com/console)
     - AWS Account #: 440377999911
-    - IAM username: guestuser1 (2,3, ...) 
+    - IAM username: cloudUser0 (2,3, ...) 
     - Password: Ask Tim. 
 2. Take 1 minute to browse Services (top left of nav bar).
 
