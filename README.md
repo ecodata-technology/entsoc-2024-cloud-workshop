@@ -103,7 +103,7 @@ Author: Tim Farkas, EcoData Technology
     - `Configuration` > `File systems` > `Add file system`.
     - EFS file system: `entsoc2024-efs2`.
     - Access point: `entsoc-efs-mp2`.
-    - Local mount path: `/mnt/ecodata2024-efs`.
+    - Local mount path: `/mnt/entsoc2024-efs`.
     - `Save`.
 
 ### Deploy An Insect Phenology Model
