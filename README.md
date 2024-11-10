@@ -38,8 +38,9 @@ Author: Tim Farkas, EcoData Technology
 7. Key Pair: `Proceed without a key pair`.
 8. Network Settings: Select "Existing security group" > Check `entsoc2024-guest-ec2` box.
 9. Configure Storage: `8 GiB gp3`.
-10. Advanced Settings
+10. Advanced Details:
     - IAM Instance Profile: `entsoc2024-ec2-instance-profile-s3-only` 
+11. Select `Launch Instance`. 
 11. Return to `Instances` > `Instances` and wait for your Instance State to be `Running`, about 30 seconds. You may need to refresh the browser.
 
 ### Explore and Connect To Your EC2 Instance - 5 min
@@ -75,7 +76,7 @@ Author: Tim Farkas, EcoData Technology
 1. In the `Code` tab, test the default function: 
     - Click `Test` > `Create new test event`. 
     - Click `Invoke` and inspect the `Output` for results. 
-2. Change line 4 ("#TODO") to: `name = event['name']`
+2. Change line 4 ("#TODO") to: `name = event['name']`. Preserve the indendataion!
 3. Change the argument to `json.dumps` to: `'Hello, ' + name + '!'`
 4.  Click `Deploy` to save your changes. Wait for function to update. 
 5.  Update the existing test event:
@@ -117,7 +118,7 @@ Author: Tim Farkas, EcoData Technology
     - `Configuration` > `File systems` > `Add file system`.
     - EFS file system: `entsoc2024-efs2`.
     - Access point: `entsoc-efs-mp2`.
-    - Local mount path: `/mnt/python-dependencies`.
+    - Local mount path: `/mnt/ecodata2024-efs`.
     - `Save`.
 4. Test the function with the same event as in step 13 above.
     - Note: PRISM allows only two downloads from the same IP per day. If you get an error about the download, try another date in your year. 

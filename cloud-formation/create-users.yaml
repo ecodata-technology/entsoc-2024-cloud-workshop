@@ -1,14 +1,651 @@
 Resources:
-  createUser:
+  createUser0:
     Type: AWS::IAM::User
     Properties:
       LoginProfile:
         Password: EntSoc2024!
         PasswordResetRequired: false
-      UserName: clouduser02
-  addUserToGroup:
+      UserName: cloudUser0
+  addUserToGroup0:
     Type: AWS::IAM::UserToGroupAddition
     Properties:
       GroupName: EntSoc2024Workshops
       Users:
-      - !Ref createUser
+      - !Ref createUser0
+  createUser1:
+    Type: AWS::IAM::User
+    Properties:
+      LoginProfile:
+        Password: EntSoc2024!
+        PasswordResetRequired: false
+      UserName: cloudUser1
+  addUserToGroup1:
+    Type: AWS::IAM::UserToGroupAddition
+    Properties:
+      GroupName: EntSoc2024Workshops
+      Users:
+      - !Ref createUser1
+  createUser2:
+    Type: AWS::IAM::User
+    Properties:
+      LoginProfile:
+        Password: EntSoc2024!
+        PasswordResetRequired: false
+      UserName: cloudUser2
+  addUserToGroup2:
+    Type: AWS::IAM::UserToGroupAddition
+    Properties:
+      GroupName: EntSoc2024Workshops
+      Users:
+      - !Ref createUser2
+  createUser3:
+    Type: AWS::IAM::User
+    Properties:
+      LoginProfile:
+        Password: EntSoc2024!
+        PasswordResetRequired: false
+      UserName: cloudUser3
+  addUserToGroup3:
+    Type: AWS::IAM::UserToGroupAddition
+    Properties:
+      GroupName: EntSoc2024Workshops
+      Users:
+      - !Ref createUser3
+  createUser4:
+    Type: AWS::IAM::User
+    Properties:
+      LoginProfile:
+        Password: EntSoc2024!
+        PasswordResetRequired: false
+      UserName: cloudUser4
+  addUserToGroup4:
+    Type: AWS::IAM::UserToGroupAddition
+    Properties:
+      GroupName: EntSoc2024Workshops
+      Users:
+      - !Ref createUser4
+  createUser5:
+    Type: AWS::IAM::User
+    Properties:
+      LoginProfile:
+        Password: EntSoc2024!
+        PasswordResetRequired: false
+      UserName: cloudUser5
+  addUserToGroup5:
+    Type: AWS::IAM::UserToGroupAddition
+    Properties:
+      GroupName: EntSoc2024Workshops
+      Users:
+      - !Ref createUser5
+  createUser6:
+    Type: AWS::IAM::User
+    Properties:
+      LoginProfile:
+        Password: EntSoc2024!
+        PasswordResetRequired: false
+      UserName: cloudUser6
+  addUserToGroup6:
+    Type: AWS::IAM::UserToGroupAddition
+    Properties:
+      GroupName: EntSoc2024Workshops
+      Users:
+      - !Ref createUser6
+  createUser7:
+    Type: AWS::IAM::User
+    Properties:
+      LoginProfile:
+        Password: EntSoc2024!
+        PasswordResetRequired: false
+      UserName: cloudUser7
+  addUserToGroup7:
+    Type: AWS::IAM::UserToGroupAddition
+    Properties:
+      GroupName: EntSoc2024Workshops
+      Users:
+      - !Ref createUser7
+  createUser8:
+    Type: AWS::IAM::User
+    Properties:
+      LoginProfile:
+        Password: EntSoc2024!
+        PasswordResetRequired: false
+      UserName: cloudUser8
+  addUserToGroup8:
+    Type: AWS::IAM::UserToGroupAddition
+    Properties:
+      GroupName: EntSoc2024Workshops
+      Users:
+      - !Ref createUser8
+  createUser9:
+    Type: AWS::IAM::User
+    Properties:
+      LoginProfile:
+        Password: EntSoc2024!
+        PasswordResetRequired: false
+      UserName: cloudUser9
+  addUserToGroup9:
+    Type: AWS::IAM::UserToGroupAddition
+    Properties:
+      GroupName: EntSoc2024Workshops
+      Users:
+      - !Ref createUser9
+  createUser10:
+    Type: AWS::IAM::User
+    Properties:
+      LoginProfile:
+        Password: EntSoc2024!
+        PasswordResetRequired: false
+      UserName: cloudUser10
+  addUserToGroup10:
+    Type: AWS::IAM::UserToGroupAddition
+    Properties:
+      GroupName: EntSoc2024Workshops
+      Users:
+      - !Ref createUser10
+  createUser11:
+    Type: AWS::IAM::User
+    Properties:
+      LoginProfile:
+        Password: EntSoc2024!
+        PasswordResetRequired: false
+      UserName: cloudUser11
+  addUserToGroup11:
+    Type: AWS::IAM::UserToGroupAddition
+    Properties:
+      GroupName: EntSoc2024Workshops
+      Users:
+      - !Ref createUser11
+  createUser12:
+    Type: AWS::IAM::User
+    Properties:
+      LoginProfile:
+        Password: EntSoc2024!
+        PasswordResetRequired: false
+      UserName: cloudUser12
+  addUserToGroup12:
+    Type: AWS::IAM::UserToGroupAddition
+    Properties:
+      GroupName: EntSoc2024Workshops
+      Users:
+      - !Ref createUser12
+  createUser13:
+    Type: AWS::IAM::User
+    Properties:
+      LoginProfile:
+        Password: EntSoc2024!
+        PasswordResetRequired: false
+      UserName: cloudUser13
+  addUserToGroup13:
+    Type: AWS::IAM::UserToGroupAddition
+    Properties:
+      GroupName: EntSoc2024Workshops
+      Users:
+      - !Ref createUser13
+  createUser14:
+    Type: AWS::IAM::User
+    Properties:
+      LoginProfile:
+        Password: EntSoc2024!
+        PasswordResetRequired: false
+      UserName: cloudUser14
+  addUserToGroup14:
+    Type: AWS::IAM::UserToGroupAddition
+    Properties:
+      GroupName: EntSoc2024Workshops
+      Users:
+      - !Ref createUser14
+  createUser15:
+    Type: AWS::IAM::User
+    Properties:
+      LoginProfile:
+        Password: EntSoc2024!
+        PasswordResetRequired: false
+      UserName: cloudUser15
+  addUserToGroup15:
+    Type: AWS::IAM::UserToGroupAddition
+    Properties:
+      GroupName: EntSoc2024Workshops
+      Users:
+      - !Ref createUser15
+  createUser16:
+    Type: AWS::IAM::User
+    Properties:
+      LoginProfile:
+        Password: EntSoc2024!
+        PasswordResetRequired: false
+      UserName: cloudUser16
+  addUserToGroup16:
+    Type: AWS::IAM::UserToGroupAddition
+    Properties:
+      GroupName: EntSoc2024Workshops
+      Users:
+      - !Ref createUser16
+  createUser17:
+    Type: AWS::IAM::User
+    Properties:
+      LoginProfile:
+        Password: EntSoc2024!
+        PasswordResetRequired: false
+      UserName: cloudUser17
+  addUserToGroup17:
+    Type: AWS::IAM::UserToGroupAddition
+    Properties:
+      GroupName: EntSoc2024Workshops
+      Users:
+      - !Ref createUser17
+  createUser18:
+    Type: AWS::IAM::User
+    Properties:
+      LoginProfile:
+        Password: EntSoc2024!
+        PasswordResetRequired: false
+      UserName: cloudUser18
+  addUserToGroup18:
+    Type: AWS::IAM::UserToGroupAddition
+    Properties:
+      GroupName: EntSoc2024Workshops
+      Users:
+      - !Ref createUser18
+  createUser19:
+    Type: AWS::IAM::User
+    Properties:
+      LoginProfile:
+        Password: EntSoc2024!
+        PasswordResetRequired: false
+      UserName: cloudUser19
+  addUserToGroup19:
+    Type: AWS::IAM::UserToGroupAddition
+    Properties:
+      GroupName: EntSoc2024Workshops
+      Users:
+      - !Ref createUser19
+  createUser20:
+    Type: AWS::IAM::User
+    Properties:
+      LoginProfile:
+        Password: EntSoc2024!
+        PasswordResetRequired: false
+      UserName: cloudUser20
+  addUserToGroup20:
+    Type: AWS::IAM::UserToGroupAddition
+    Properties:
+      GroupName: EntSoc2024Workshops
+      Users:
+      - !Ref createUser20
+  createUser21:
+    Type: AWS::IAM::User
+    Properties:
+      LoginProfile:
+        Password: EntSoc2024!
+        PasswordResetRequired: false
+      UserName: cloudUser21
+  addUserToGroup21:
+    Type: AWS::IAM::UserToGroupAddition
+    Properties:
+      GroupName: EntSoc2024Workshops
+      Users:
+      - !Ref createUser21
+  createUser22:
+    Type: AWS::IAM::User
+    Properties:
+      LoginProfile:
+        Password: EntSoc2024!
+        PasswordResetRequired: false
+      UserName: cloudUser22
+  addUserToGroup22:
+    Type: AWS::IAM::UserToGroupAddition
+    Properties:
+      GroupName: EntSoc2024Workshops
+      Users:
+      - !Ref createUser22
+  createUser23:
+    Type: AWS::IAM::User
+    Properties:
+      LoginProfile:
+        Password: EntSoc2024!
+        PasswordResetRequired: false
+      UserName: cloudUser23
+  addUserToGroup23:
+    Type: AWS::IAM::UserToGroupAddition
+    Properties:
+      GroupName: EntSoc2024Workshops
+      Users:
+      - !Ref createUser23
+  createUser24:
+    Type: AWS::IAM::User
+    Properties:
+      LoginProfile:
+        Password: EntSoc2024!
+        PasswordResetRequired: false
+      UserName: cloudUser24
+  addUserToGroup24:
+    Type: AWS::IAM::UserToGroupAddition
+    Properties:
+      GroupName: EntSoc2024Workshops
+      Users:
+      - !Ref createUser24
+  createUser25:
+    Type: AWS::IAM::User
+    Properties:
+      LoginProfile:
+        Password: EntSoc2024!
+        PasswordResetRequired: false
+      UserName: cloudUser25
+  addUserToGroup25:
+    Type: AWS::IAM::UserToGroupAddition
+    Properties:
+      GroupName: EntSoc2024Workshops
+      Users:
+      - !Ref createUser25
+  createUser26:
+    Type: AWS::IAM::User
+    Properties:
+      LoginProfile:
+        Password: EntSoc2024!
+        PasswordResetRequired: false
+      UserName: cloudUser26
+  addUserToGroup26:
+    Type: AWS::IAM::UserToGroupAddition
+    Properties:
+      GroupName: EntSoc2024Workshops
+      Users:
+      - !Ref createUser26
+  createUser27:
+    Type: AWS::IAM::User
+    Properties:
+      LoginProfile:
+        Password: EntSoc2024!
+        PasswordResetRequired: false
+      UserName: cloudUser27
+  addUserToGroup27:
+    Type: AWS::IAM::UserToGroupAddition
+    Properties:
+      GroupName: EntSoc2024Workshops
+      Users:
+      - !Ref createUser27
+  createUser28:
+    Type: AWS::IAM::User
+    Properties:
+      LoginProfile:
+        Password: EntSoc2024!
+        PasswordResetRequired: false
+      UserName: cloudUser28
+  addUserToGroup28:
+    Type: AWS::IAM::UserToGroupAddition
+    Properties:
+      GroupName: EntSoc2024Workshops
+      Users:
+      - !Ref createUser28
+  createUser29:
+    Type: AWS::IAM::User
+    Properties:
+      LoginProfile:
+        Password: EntSoc2024!
+        PasswordResetRequired: false
+      UserName: cloudUser29
+  addUserToGroup29:
+    Type: AWS::IAM::UserToGroupAddition
+    Properties:
+      GroupName: EntSoc2024Workshops
+      Users:
+      - !Ref createUser29
+  createUser30:
+    Type: AWS::IAM::User
+    Properties:
+      LoginProfile:
+        Password: EntSoc2024!
+        PasswordResetRequired: false
+      UserName: cloudUser30
+  addUserToGroup30:
+    Type: AWS::IAM::UserToGroupAddition
+    Properties:
+      GroupName: EntSoc2024Workshops
+      Users:
+      - !Ref createUser30
+  createUser31:
+    Type: AWS::IAM::User
+    Properties:
+      LoginProfile:
+        Password: EntSoc2024!
+        PasswordResetRequired: false
+      UserName: cloudUser31
+  addUserToGroup31:
+    Type: AWS::IAM::UserToGroupAddition
+    Properties:
+      GroupName: EntSoc2024Workshops
+      Users:
+      - !Ref createUser31
+  createUser32:
+    Type: AWS::IAM::User
+    Properties:
+      LoginProfile:
+        Password: EntSoc2024!
+        PasswordResetRequired: false
+      UserName: cloudUser32
+  addUserToGroup32:
+    Type: AWS::IAM::UserToGroupAddition
+    Properties:
+      GroupName: EntSoc2024Workshops
+      Users:
+      - !Ref createUser32
+  createUser33:
+    Type: AWS::IAM::User
+    Properties:
+      LoginProfile:
+        Password: EntSoc2024!
+        PasswordResetRequired: false
+      UserName: cloudUser33
+  addUserToGroup33:
+    Type: AWS::IAM::UserToGroupAddition
+    Properties:
+      GroupName: EntSoc2024Workshops
+      Users:
+      - !Ref createUser33
+  createUser34:
+    Type: AWS::IAM::User
+    Properties:
+      LoginProfile:
+        Password: EntSoc2024!
+        PasswordResetRequired: false
+      UserName: cloudUser34
+  addUserToGroup34:
+    Type: AWS::IAM::UserToGroupAddition
+    Properties:
+      GroupName: EntSoc2024Workshops
+      Users:
+      - !Ref createUser34
+  createUser35:
+    Type: AWS::IAM::User
+    Properties:
+      LoginProfile:
+        Password: EntSoc2024!
+        PasswordResetRequired: false
+      UserName: cloudUser35
+  addUserToGroup35:
+    Type: AWS::IAM::UserToGroupAddition
+    Properties:
+      GroupName: EntSoc2024Workshops
+      Users:
+      - !Ref createUser35
+  createUser36:
+    Type: AWS::IAM::User
+    Properties:
+      LoginProfile:
+        Password: EntSoc2024!
+        PasswordResetRequired: false
+      UserName: cloudUser36
+  addUserToGroup36:
+    Type: AWS::IAM::UserToGroupAddition
+    Properties:
+      GroupName: EntSoc2024Workshops
+      Users:
+      - !Ref createUser36
+  createUser37:
+    Type: AWS::IAM::User
+    Properties:
+      LoginProfile:
+        Password: EntSoc2024!
+        PasswordResetRequired: false
+      UserName: cloudUser37
+  addUserToGroup37:
+    Type: AWS::IAM::UserToGroupAddition
+    Properties:
+      GroupName: EntSoc2024Workshops
+      Users:
+      - !Ref createUser37
+  createUser38:
+    Type: AWS::IAM::User
+    Properties:
+      LoginProfile:
+        Password: EntSoc2024!
+        PasswordResetRequired: false
+      UserName: cloudUser38
+  addUserToGroup38:
+    Type: AWS::IAM::UserToGroupAddition
+    Properties:
+      GroupName: EntSoc2024Workshops
+      Users:
+      - !Ref createUser38
+  createUser39:
+    Type: AWS::IAM::User
+    Properties:
+      LoginProfile:
+        Password: EntSoc2024!
+        PasswordResetRequired: false
+      UserName: cloudUser39
+  addUserToGroup39:
+    Type: AWS::IAM::UserToGroupAddition
+    Properties:
+      GroupName: EntSoc2024Workshops
+      Users:
+      - !Ref createUser39
+  createUser40:
+    Type: AWS::IAM::User
+    Properties:
+      LoginProfile:
+        Password: EntSoc2024!
+        PasswordResetRequired: false
+      UserName: cloudUser40
+  addUserToGroup40:
+    Type: AWS::IAM::UserToGroupAddition
+    Properties:
+      GroupName: EntSoc2024Workshops
+      Users:
+      - !Ref createUser40
+  createUser41:
+    Type: AWS::IAM::User
+    Properties:
+      LoginProfile:
+        Password: EntSoc2024!
+        PasswordResetRequired: false
+      UserName: cloudUser41
+  addUserToGroup41:
+    Type: AWS::IAM::UserToGroupAddition
+    Properties:
+      GroupName: EntSoc2024Workshops
+      Users:
+      - !Ref createUser41
+  createUser42:
+    Type: AWS::IAM::User
+    Properties:
+      LoginProfile:
+        Password: EntSoc2024!
+        PasswordResetRequired: false
+      UserName: cloudUser42
+  addUserToGroup42:
+    Type: AWS::IAM::UserToGroupAddition
+    Properties:
+      GroupName: EntSoc2024Workshops
+      Users:
+      - !Ref createUser42
+  createUser43:
+    Type: AWS::IAM::User
+    Properties:
+      LoginProfile:
+        Password: EntSoc2024!
+        PasswordResetRequired: false
+      UserName: cloudUser43
+  addUserToGroup43:
+    Type: AWS::IAM::UserToGroupAddition
+    Properties:
+      GroupName: EntSoc2024Workshops
+      Users:
+      - !Ref createUser43
+  createUser44:
+    Type: AWS::IAM::User
+    Properties:
+      LoginProfile:
+        Password: EntSoc2024!
+        PasswordResetRequired: false
+      UserName: cloudUser44
+  addUserToGroup44:
+    Type: AWS::IAM::UserToGroupAddition
+    Properties:
+      GroupName: EntSoc2024Workshops
+      Users:
+      - !Ref createUser44
+  createUser45:
+    Type: AWS::IAM::User
+    Properties:
+      LoginProfile:
+        Password: EntSoc2024!
+        PasswordResetRequired: false
+      UserName: cloudUser45
+  addUserToGroup45:
+    Type: AWS::IAM::UserToGroupAddition
+    Properties:
+      GroupName: EntSoc2024Workshops
+      Users:
+      - !Ref createUser45
+  createUser46:
+    Type: AWS::IAM::User
+    Properties:
+      LoginProfile:
+        Password: EntSoc2024!
+        PasswordResetRequired: false
+      UserName: cloudUser46
+  addUserToGroup46:
+    Type: AWS::IAM::UserToGroupAddition
+    Properties:
+      GroupName: EntSoc2024Workshops
+      Users:
+      - !Ref createUser46
+  createUser47:
+    Type: AWS::IAM::User
+    Properties:
+      LoginProfile:
+        Password: EntSoc2024!
+        PasswordResetRequired: false
+      UserName: cloudUser47
+  addUserToGroup47:
+    Type: AWS::IAM::UserToGroupAddition
+    Properties:
+      GroupName: EntSoc2024Workshops
+      Users:
+      - !Ref createUser47
+  createUser48:
+    Type: AWS::IAM::User
+    Properties:
+      LoginProfile:
+        Password: EntSoc2024!
+        PasswordResetRequired: false
+      UserName: cloudUser48
+  addUserToGroup48:
+    Type: AWS::IAM::UserToGroupAddition
+    Properties:
+      GroupName: EntSoc2024Workshops
+      Users:
+      - !Ref createUser48
+  createUser49:
+    Type: AWS::IAM::User
+    Properties:
+      LoginProfile:
+        Password: EntSoc2024!
+        PasswordResetRequired: false
+      UserName: cloudUser49
+  addUserToGroup49:
+    Type: AWS::IAM::UserToGroupAddition
+    Properties:
+      GroupName: EntSoc2024Workshops
+      Users:
+      - !Ref createUser49
