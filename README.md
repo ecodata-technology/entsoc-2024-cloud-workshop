@@ -4,19 +4,19 @@ Author: Tim Farkas, EcoData Technology
 ## Getting Started
 1. Log in to AWS console with [this login](https://440377999911.signin.aws.amazon.com/console)
     - AWS Account #: 440377999911
-    - IAM username: cloudUser0 (2,3, ...) 
+    - IAM username: cloudUser0 (2,3, ..., 149) 
     - Password: Ask Tim. 
 2. Take 1 minute to browse Services (top left of nav bar).
 
-## Simple Storage Service (S3) - 5 minutes
+## Simple Storage Service (S3)
 1. Navigate to S3 console. 
 2. Navigate to `entsoc2024-ecodata-cloud-workshop/uploads`.
-3. Download a file from to your local machine. 
+3. Download a file from S3 to your local machine. 
     - Select the checkbox for your desired file. 
     - Click `Download`. 
 4. Create a new folder: 
    - `Create folder`. 
-   - Enter a unique folder name, such as your initials. 
+   - Enter a unique folder name, such as your username. 
    - Don't specifiy an encryption key. 
    - `Create folder`. 
 5. Upload a small file from your local machine.
@@ -25,34 +25,37 @@ Author: Tim Farkas, EcoData Technology
     - Wait for the upload to finish, then close the upload details page. 
 
 ## Elastic Cloud Compute (EC2)
-### Launch An EC2 Instance - 5 min
+### Launch An EC2 Instance 
 1. Navigate to EC2 Dashboard, then `Instances` > `Instances` on the left nav bar.
 2. Make sure you are in region `N. Virginia` (top nav bar).
 3. Select `Launch instances`.
-4. Name your instance with your initials: e.g., `entsoc2024-tef`.
+4. Name your instance with your username: e.g., `cloudUser149`.
 5. Application and OS Images: 
     - Select `Ubuntu` card. 
-    - Amazon Machine Image: `Ubuntu Server 24.04`.
-    - Architecture: `64-bit (x84)`.
-6. Instance Type: `t2.micro`.
+    - Amazon Machine Image: `Ubuntu Server 24.04`. (default)
+    - Architecture: `64-bit (x84)`. (default)
+6. Instance Type: `t2.micro`. (default)
 7. Key Pair: `Proceed without a key pair`.
 8. Network Settings: Select "Existing security group" > Check `entsoc2024-guest-ec2` box.
-9. Configure Storage: `8 GiB gp3`.
+9. Configure Storage: `8 GiB gp3`. (default)
 10. Advanced Details:
     - IAM Instance Profile: `entsoc2024-ec2-instance-profile-s3-only` 
 11. Select `Launch Instance`. 
 11. Return to `Instances` > `Instances` and wait for your Instance State to be `Running`, about 30 seconds. You may need to refresh the browser.
 
-### Explore and Connect To Your EC2 Instance - 5 min
+### Explore and Connect To Your EC2 Instance
 1. Click your `Instance ID` to view a summary of your instance configuration. 
 2. Connect to your Instance: 
     - Click `Connect` > `EC2 Instance Connect` > `Connect using EC2 Instance Connect Endpoint`
-    - Endpoint: `eice-078bd40ce8546647c`
-    - Username: `ubuntu`
+    - Endpoint: `eice-078bd40ce8546647c` (default)
+    - Username: `ubuntu` (default)
     - Click `Connect` to open a terminal window in your browser.
-3. Submit command `ls -al` to see contents of your home directory.
+3. View the contents of your home directory: `ls -al`.
+4. Create a new file: `touch deleteme.txt`.
+5. View the contents of your home directory `ls -al`.
+6. Delete the file: `rm deleteme.txt`.
 
-### Use the AWS CLI - 10 min
+### Use the AWS CLI
 1. Install the AWS Command Line Interface (CLI): `sudo snap install aws-cli --classic`
 2. Check the CLI is installed: `aws --version`.
 3. List the S3 buckets in your account: `aws s3 ls`.
@@ -63,7 +66,7 @@ Author: Tim Farkas, EcoData Technology
     - Check the download was successful with `ls -al`. 
 
 ## Serverless Compute with AWS Lambda Functions
-### Create A Lambda Function - 5 min
+### Create A Lambda Function
 1. Navigate to the Lambda service. 
 2. Select `Create function` > `Author from scratch`. 
 3. Give it a name prefixed with `entsoc2024` and suffixed with your initials, e.g, `entsoc2024-tef`.
@@ -72,7 +75,7 @@ Author: Tim Farkas, EcoData Technology
 6. Change default execution role: `Use an existing role` > `entsoc2024-lambda-role`.
 7. Click `Create function`.
 
-### Hello World - 5 min
+### Hello World
 1. In the `Code` tab, test the default function: 
     - Click `Test` > `Create new test event`. 
     - Click `Invoke` and inspect the `Output` for results. 
@@ -83,7 +86,7 @@ Author: Tim Farkas, EcoData Technology
     - Change `key1` to `name`, and `value1` to `you gorgeous cloud user` (or whatever you want).
     - Click `Invoke` and inspect the `Output` for results. 
 
-### Deploy An Insect Phenology Model - 5 min
+### Deploy An Insect Phenology Model
 1. Deploy the phenology model code: 
     - In another browser tab, navigate to the workshop S3 bucket. 
     - Select `lambda_deployment.zip` and copy the `URL` (not `S3 URI`) to your clipboard. 
